@@ -154,11 +154,17 @@
             font-weight: bold;
         }
 
-        /* Grid for Resources (Buttons Section) */
+        /* Grid for Resources (Exactly 2 Columns for your 2 PDFs) */
         .grid-resources {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .grid-resources {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card {
@@ -213,53 +219,62 @@
             background-color: var(--accent-hover);
         }
 
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-color: var(--text-muted);
-        }
-
-        /* Store / Material POP Section */
+        /* Store / Material POP Section con Fotos Reales */
         .grid-store {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
         }
 
         .store-item {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 20px;
+            padding: 24px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: border-color 0.2s ease;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
         .store-item:hover {
             border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-2px);
         }
 
-        .store-icon {
-            font-size: 3.5rem;
-            margin: 15px 0;
+        .store-img-container {
+            width: 100%;
+            height: 240px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .store-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .store-item:hover .store-img {
+            transform: scale(1.04);
         }
 
         .store-item h3 {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             margin-bottom: 6px;
             color: white;
         }
 
         .store-price {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             color: var(--success-color);
             font-weight: 700;
             margin-bottom: 15px;
@@ -269,11 +284,11 @@
             background-color: rgba(16, 185, 129, 0.15);
             border: 1px solid var(--success-color);
             color: #a7f3d0;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: 600;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
 
@@ -369,33 +384,36 @@
 
     <main class="container">
         
+        <!-- Sobre el Proyecto -->
         <section id="concepto">
             <h2>Sobre el Proyecto</h2>
             <div class="project-summary">
                 <div class="summary-card">
                     <h3>🎯 Objetivo General</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Diseñar un prototipo de aplicación de bienestar estudiantil que fomente la salud emocional, la empatía y la autorregulación mediante el uso creativo y responsable de la tecnología.</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Diseñar un prototipo de aplicación de bienestar estudiantil que fomente la salud emocional, la empatía y la autorregulación de los estudiantes de Eight Academy, mediante el uso creativo y responsable de la tecnología.</p>
                 </div>
                 <div class="summary-card">
                     <h3>⚠️ Problema Identificado</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Estrés académico en momentos de evaluaciones, dificultades para reconocer y nombrar emociones, escasa práctica de autorregulación y conflictos por falta de empatía o comunicación impulsiva.</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Estrés académico en momentos de evaluaciones, dificultades para reconocer y nombrar emociones, escasa práctica diaria de autorregulación y conflictos por falta de empatía o comunicación impulsiva.</p>
                 </div>
                 <div class="summary-card">
                     <h3>💡 Componentes Clave</h3>
                     <ul>
-                        <li><strong>Mood Check:</strong> Registro diario de emociones por colores.</li>
-                        <li><strong>Autorregulación:</strong> Ejercicios breves de respiración (4-4-4).</li>
-                        <li><strong>Wolf AI:</strong> Asistente conversacional empático.</li>
-                        <li><strong>Blockchain:</strong> Transparencia con Eight-Coins.</li>
+                        <li><strong>Mood Check:</strong> Registro diario de emociones por códigos de color.</li>
+                        <li><strong>Autorregulación:</strong> Ejercicios breves de respiración guiada (4-4-4).</li>
+                        <li><strong>Wolf AI:</strong> Asistente conversacional empático (Chatbot).</li>
+                        <li><strong>Blockchain:</strong> Transparencia e incentivos con Eight-Coins.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
+        <!-- Materiales del Proyecto (Únicos 2 PDFs Reales mapeados) -->
         <section id="entregables">
             <h2>Materiales del Proyecto</h2>
             <div class="grid-resources">
                 
+                <!-- Tarjeta 1: Presentación Final -->
                 <div class="card">
                     <div>
                         <div class="card-icon">📊</div>
@@ -405,6 +423,7 @@
                     <a href="Los Wolf presentación final.pdf" class="btn" target="_blank">Ver Presentación</a>
                 </div>
 
+                <!-- Tarjeta 2: Whitepaper Oficial -->
                 <div class="card">
                     <div>
                         <div class="card-icon">📝</div>
@@ -414,60 +433,70 @@
                     <a href="Whitepaper Wolves .pdf" class="btn" target="_blank">Leer Whitepaper</a>
                 </div>
 
-                <div class="card">
-                    <div>
-                        <div class="card-icon">📂</div>
-                        <h3>Raíz del Repositorio</h3>
-                        <p>Acceso directo al índice principal de archivos en GitHub, donde se alojan todas las evidencias visuales, códigos y el video promocional del equipo.</p>
-                    </div>
-                    <a href="https://github.com/alparrenob-ship-it/Wolves" class="btn btn-secondary" target="_blank">Explorar Repositorio</a>
-                </div>
-
             </div>
         </section>
 
+        <!-- Tienda Oficial / Material POP con Fotos Reales vinculadas -->
         <section id="tienda">
             <h2>Tienda Oficial - Material POP</h2>
             <p style="color: var(--text-muted); margin-bottom: 25px; margin-top: -20px; font-size: 0.95rem;">Los estudiantes pueden canjear sus <strong>Eight-Coins</strong> acumuladas por estos fabulosos artículos de la manada:</p>
             <div class="grid-store">
                 
+                <!-- Peluche -->
                 <div class="store-item">
-                    <div class="store-icon">🧸</div>
+                    <div class="store-img-container">
+                        <img src="peluche.jpeg" alt="Peluche Oficial Los Wolves" class="store-img">
+                    </div>
                     <h3>Peluche Oficial</h3>
                     <p class="store-price">$15.00</p>
                     <span class="btn-store">Canjear Producto</span>
                 </div>
 
+                <!-- Taza -->
                 <div class="store-item">
-                    <div class="store-icon">☕</div>
+                    <div class="store-img-container">
+                        <img src="taza.jpeg" alt="Taza Oficial Los Wolves" class="store-img">
+                    </div>
                     <h3>Taza Wolves</h3>
                     <p class="store-price">$8.00</p>
                     <span class="btn-store">Canjear Producto</span>
                 </div>
 
+                <!-- Agenda -->
                 <div class="store-item">
-                    <div class="store-icon">📔</div>
+                    <div class="store-img-container">
+                        <img src="agenda.jpeg" alt="Agenda Emocional Los Wolves" class="store-img">
+                    </div>
                     <h3>Agenda Emocional</h3>
                     <p class="store-price">$12.00</p>
                     <span class="btn-store">Canjear Producto</span>
                 </div>
 
+                <!-- Llavero -->
                 <div class="store-item">
-                    <div class="store-icon">🔑</div>
+                    <div class="store-img-container">
+                        <img src="llavero.jpeg" alt="Llavero Oficial Los Wolves" class="store-img">
+                    </div>
                     <h3>Llavero Wolves</h3>
                     <p class="store-price">$5.00</p>
                     <span class="btn-store">Canjear Producto</span>
                 </div>
 
+                <!-- Gorra -->
                 <div class="store-item">
-                    <div class="store-icon">🧢</div>
+                    <div class="store-img-container">
+                        <img src="gorra.jpeg" alt="Gorra Oficial Los Wolves" class="store-img">
+                    </div>
                     <h3>Gorra Wolves</h3>
                     <p class="store-price">$18.00</p>
                     <span class="btn-store">Canjear Producto</span>
                 </div>
 
+                <!-- Hoodie -->
                 <div class="store-item">
-                    <div class="store-icon">🧥</div>
+                    <div class="store-img-container">
+                        <img src="hoodie.jpeg" alt="Hoodie Oficial Los Wolves" class="store-img">
+                    </div>
                     <h3>Hoodie Wolves</h3>
                     <p class="store-price">$35.00</p>
                     <span class="btn-store">Canjear Producto</span>
@@ -476,6 +505,7 @@
             </div>
         </section>
 
+        <!-- Nuestro Equipo Real -->
         <section id="equipo">
             <h2>Nuestro Equipo (Séptimo A)</h2>
             <div class="grid-team">

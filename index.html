@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipo Wolves - Hackathon Eight Academy 2026</title>
+    <title>Los Wolves - App de Bienestar Estudiantil</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -12,6 +12,7 @@
             --text-muted: #9ca3af;
             --accent-color: #3b82f6;
             --accent-hover: #2563eb;
+            --success-color: #10b981;
             --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
             --border-color: #242b3d;
         }
@@ -31,7 +32,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -60,31 +61,39 @@
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             letter-spacing: -0.02em;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             background: linear-gradient(to right, #ffffff, #9ca3af);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .slogan {
+            font-size: 1.25rem;
+            color: var(--success-color);
+            font-style: italic;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
         .lead {
             font-size: 1.2rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 750px;
             margin: 0 auto 30px auto;
         }
 
         /* Section Layout */
         section {
-            margin-top: 60px;
+            margin-top: 70px;
         }
 
         h2 {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             position: relative;
             display: inline-block;
         }
@@ -94,25 +103,73 @@
             position: absolute;
             bottom: -6px;
             left: 0;
-            width: 40px;
+            width: 50px;
             height: 3px;
             background: var(--gradient-accent);
             border-radius: 2px;
         }
 
-        /* Grid for Resources */
+        /* Feature Row (Problem / Solution / Objective) */
+        .project-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .summary-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .summary-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-card ul {
+            list-style-type: none;
+            margin-top: 10px;
+        }
+
+        .summary-card li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .summary-card li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Grid for Resources (Buttons Section) */
         .grid-resources {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 24px;
+            padding: 28px;
             transition: transform 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
@@ -121,34 +178,35 @@
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 16px;
         }
 
         .card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
             font-weight: 600;
+            color: white;
         }
 
         .card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            flex-grow: 1;
         }
 
         .btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: var(--accent-color);
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: background-color 0.2s ease;
             text-align: center;
-            width: 100%;
         }
 
         .btn:hover {
@@ -163,12 +221,71 @@
 
         .btn-secondary:hover {
             background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-muted);
+        }
+
+        /* Store / Material POP Section */
+        .grid-store {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .store-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s ease;
+        }
+
+        .store-item:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .store-icon {
+            font-size: 3.5rem;
+            margin: 15px 0;
+        }
+
+        .store-item h3 {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            color: white;
+        }
+
+        .store-price {
+            font-size: 1.3rem;
+            color: var(--success-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .btn-store {
+            background-color: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--success-color);
+            color: #a7f3d0;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .btn-store:hover {
+            background-color: var(--success-color);
+            color: white;
         }
 
         /* Team Section */
         .grid-team {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
@@ -177,50 +294,64 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 24px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: var(--gradient-accent);
-            margin: 0 auto 16px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: white;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+            flex-shrink: 0;
         }
 
-        .team-member h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
+        .member-info h3 {
+            font-size: 1.15rem;
+            margin-bottom: 2px;
+            color: white;
         }
 
-        .team-member p {
+        .member-info p {
             color: var(--accent-color);
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
+        .coordination {
+            margin-top: 30px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-color);
+            padding: 15px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
         /* Footer */
         footer {
-            margin-top: 80px;
+            margin-top: 90px;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
-            padding-top: 24px;
+            padding-top: 30px;
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
+            h1 { font-size: 2.5rem; }
             header { padding: 50px 20px; }
         }
     </style>
@@ -229,78 +360,185 @@
 
     <header>
         <div class="container">
-            <span class="badge">Hackathon Eight Academy 2026</span>
-            <h1>Equipo Wolves 🐺</h1>
-            <p class="lead">Repositorio Oficial de Entregables, Presentaciones y Evidencias del Proyecto.</p>
+            <span class="badge">Hackathon Eight Academy 2025-2026</span>
+            <h1>Los Wolves 🐺</h1>
+            <p class="slogan">"Tu bienestar es clave para aprender mejor."</p>
+            <p class="lead">Prototipo oficial de nuestra Aplicación Digital de Bienestar Estudiantil diseñada para fortalecer la salud emocional, la empatía y la autorregulación dentro de la comunidad educativa.</p>
         </div>
     </header>
 
     <main class="container">
         
+        <section id="concepto">
+            <h2>Sobre el Proyecto</h2>
+            <div class="project-summary">
+                <div class="summary-card">
+                    <h3>🎯 Objetivo General</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Diseñar un prototipo de aplicación de bienestar estudiantil que fomente la salud emocional, la empatía y la autorregulación mediante el uso creativo y responsable de la tecnología.</p>
+                </div>
+                <div class="summary-card">
+                    <h3>⚠️ Problema Identificado</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Estrés académico en momentos de evaluaciones, dificultades para reconocer y nombrar emociones, escasa práctica de autorregulación y conflictos por falta de empatía o comunicación impulsiva.</p>
+                </div>
+                <div class="summary-card">
+                    <h3>💡 Componentes Clave</h3>
+                    <ul>
+                        <li><strong>Mood Check:</strong> Registro diario de emociones por colores.</li>
+                        <li><strong>Autorregulación:</strong> Ejercicios breves de respiración (4-4-4).</li>
+                        <li><strong>Wolf AI:</strong> Asistente conversacional empático.</li>
+                        <li><strong>Blockchain:</strong> Transparencia con Eight-Coins.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <section id="entregables">
             <h2>Materiales del Proyecto</h2>
             <div class="grid-resources">
                 
                 <div class="card">
-                    <div class="card-icon">📊</div>
-                    <h3>Presentación del Proyecto</h3>
-                    <p>Diapositivas completas con la propuesta de valor, arquitectura y modelo de negocio de Wolves.</p>
-                    <a href="Whitepaper Wolves .pdf" class="btn" target="_blank">Ver Presentación</a>
+                    <div>
+                        <div class="card-icon">📊</div>
+                        <h3>Presentación Final</h3>
+                        <p>Diapositivas oficiales utilizadas en la defensa oral del proyecto. Contiene la metodología Design Thinking, planteamiento del problema y capturas del prototipo.</p>
+                    </div>
+                    <a href="Los Wolf presentación final.pdf" class="btn" target="_blank">Ver Presentación</a>
                 </div>
 
                 <div class="card">
-                    <div class="card-icon">🎨</div>
-                    <h3>Identidad Visual & Wallpapers</h3>
-                    <p>Galería de recursos gráficos, logotipos, fondos de pantalla y mockups oficiales del equipo.</p>
-                    <a href="https://github.com/alparrenob-ship-it/Wolves/tree/main/Material%20POP" class="btn btn-secondary" target="_blank">Explorar Galería</a>
+                    <div>
+                        <div class="card-icon">📝</div>
+                        <h3>Whitepaper del Proyecto</h3>
+                        <p>Documentación técnica detallada que profundiza en la delimitación del tema, la justificación escolar, el funcionamiento del backend y los costos estimados de implementación.</p>
+                    </div>
+                    <a href="Whitepaper Wolves .pdf" class="btn" target="_blank">Leer Whitepaper</a>
                 </div>
 
                 <div class="card">
-                    <div class="card-icon">📅</div>
-                    <h3>Cronograma de Evidencias</h3>
-                    <p>Documentación del progreso del equipo, tablas de control, tareas completadas y planificación.</p>
-                    <a href="https://github.com/alparrenob-ship-it/Wolves/tree/main/Conocenos" class="btn btn-secondary" target="_blank">Ver Documentación</a>
+                    <div>
+                        <div class="card-icon">📂</div>
+                        <h3>Raíz del Repositorio</h3>
+                        <p>Acceso directo al índice principal de archivos en GitHub, donde se alojan todas las evidencias visuales, códigos y el video promocional del equipo.</p>
+                    </div>
+                    <a href="https://github.com/alparrenob-ship-it/Wolves" class="btn btn-secondary" target="_blank">Explorar Repositorio</a>
                 </div>
 
             </div>
         </section>
 
-        <!-- Sección del Equipo -->
+        <section id="tienda">
+            <h2>Tienda Oficial - Material POP</h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px; margin-top: -20px; font-size: 0.95rem;">Los estudiantes pueden canjear sus <strong>Eight-Coins</strong> acumuladas por estos fabulosos artículos de la manada:</p>
+            <div class="grid-store">
+                
+                <div class="store-item">
+                    <div class="store-icon">🧸</div>
+                    <h3>Peluche Oficial</h3>
+                    <p class="store-price">$15.00</p>
+                    <span class="btn-store">Canjear Producto</span>
+                </div>
+
+                <div class="store-item">
+                    <div class="store-icon">☕</div>
+                    <h3>Taza Wolves</h3>
+                    <p class="store-price">$8.00</p>
+                    <span class="btn-store">Canjear Producto</span>
+                </div>
+
+                <div class="store-item">
+                    <div class="store-icon">📔</div>
+                    <h3>Agenda Emocional</h3>
+                    <p class="store-price">$12.00</p>
+                    <span class="btn-store">Canjear Producto</span>
+                </div>
+
+                <div class="store-item">
+                    <div class="store-icon">🔑</div>
+                    <h3>Llavero Wolves</h3>
+                    <p class="store-price">$5.00</p>
+                    <span class="btn-store">Canjear Producto</span>
+                </div>
+
+                <div class="store-item">
+                    <div class="store-icon">🧢</div>
+                    <h3>Gorra Wolves</h3>
+                    <p class="store-price">$18.00</p>
+                    <span class="btn-store">Canjear Producto</span>
+                </div>
+
+                <div class="store-item">
+                    <div class="store-icon">🧥</div>
+                    <h3>Hoodie Wolves</h3>
+                    <p class="store-price">$35.00</p>
+                    <span class="btn-store">Canjear Producto</span>
+                </div>
+
+            </div>
+        </section>
+
         <section id="equipo">
-            <h2>Nuestro Equipo</h2>
+            <h2>Nuestro Equipo (Séptimo A)</h2>
             <div class="grid-team">
                 
                 <div class="team-member">
-                    <div class="avatar">C</div>
-                    <h3>Combinade</h3>
-                    <p>Desarrollador / Integrante</p>
+                    <div class="avatar">MB</div>
+                    <div class="member-info">
+                        <h3>Maite Bravo</h3>
+                        <p>Líder de Proyecto</p>
+                    </div>
                 </div>
 
                 <div class="team-member">
-                    <div class="avatar">A</div>
-                    <h3>ANDELGADO</h3>
-                    <p>Líder de Proyecto</p>
+                    <div class="avatar">CI</div>
+                    <div class="member-info">
+                        <h3>Camilo Isava</h3>
+                        <p>Secretario / Documentación</p>
+                    </div>
                 </div>
 
                 <div class="team-member">
-                    <div class="avatar">T</div>
-                    <h3>TACA</h3>
-                    <p>Diseñador / Integrante</p>
+                    <div class="avatar">LB</div>
+                    <div class="member-info">
+                        <h3>Leonardo Benítez</h3>
+                        <p>Diseñador de Interfaz</p>
+                    </div>
                 </div>
 
                 <div class="team-member">
-                    <div class="avatar">A</div>
-                    <h3>ALIANA LOMBEIDA</h3>
-                    <p>Documentación / Integrante</p>
+                    <div class="avatar">HY</div>
+                    <div class="member-info">
+                        <h3>Hazel Yanez</h3>
+                        <p>Expositor / Vocero</p>
+                    </div>
                 </div>
 
+                <div class="team-member">
+                    <div class="avatar">DP</div>
+                    <div class="member-info">
+                        <h3>David Palacios</h3>
+                        <p>Especialista en Marketing</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="avatar">GM</div>
+                    <div class="member-info">
+                        <h3>Gabriel Marcillo</h3>
+                        <p>Investigador / Encuestas QR</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="coordination">
+                <strong>Coordinación General del Proyecto:</strong> Lcda. Anita Parreño | Año Lectivo 2025-2026
             </div>
         </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2026 Equipo Wolves. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Equipo Los Wolves - Unidad Educativa Eight Academy. Todos los derechos reservados.</p>
     </footer>
 
 </body>

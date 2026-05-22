@@ -6,6 +6,7 @@ Hazel Yánez – Secretaria
 Camilo Isava – Expositor
 David Palacios – Diseñador
 Gabriel Marcillo – Investigador
+Anita Parreño - Mnentora
 # Problema que se quiere resolver
 Actualmente muchos estudiantes enfrentan estrés académico, ansiedad, frustración, tristeza y dificultades para expresar sus emociones dentro del entorno escolar. En muchas ocasiones, estas emociones pasan desapercibidas, provocando problemas de convivencia, bajo rendimiento académico, desmotivación y afectaciones en la salud emocional de los estudiantes.
 

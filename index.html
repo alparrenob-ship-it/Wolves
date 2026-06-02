@@ -33,7 +33,6 @@
         ::-webkit-scrollbar-track { background: var(--navy); }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 999px; }
 
-        /* Estilo premium de tarjetas de emociones */
         .emotion-card-custom {
             background: #030a1e;
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -41,190 +40,52 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .emotion-card-custom:hover {
-            transform: translateY(-4px);
-            background: #051233;
-        }
+        .emotion-card-custom:hover { transform: translateY(-4px); background: #051233; }
 
-        /* Anillos Neón al seleccionar emociones */
         .emotion-card-wrapper input[type="radio"]#emotion-alegre:checked + label { border-color: #00e676 !important; box-shadow: 0 0 20px rgba(0,230,118,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-tranquilo:checked + label { border-color: #00b8d4 !important; box-shadow: 0 0 20px rgba(0,184,212,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-triste:checked + label { border-color: #9333ea !important; box-shadow: 0 0 20px rgba(147,51,234,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-ansioso:checked + label { border-color: #eab308 !important; box-shadow: 0 0 20px rgba(234,179,8,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-enojado:checked + label { border-color: #ef4444 !important; box-shadow: 0 0 20px rgba(239,68,68,0.25); }
 
-        /* Círculos selectores vacíos / llenos */
         .selector-dot {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #27354a;
-            border-radius: 50%;
-            margin: 0 auto;
-            transition: all 0.2s;
+            width: 18px; height: 18px; border: 2px solid #27354a; border-radius: 50%; margin: 0 auto; transition: all 0.2s;
         }
         .emotion-card-wrapper input[type="radio"]:checked + label .selector-dot {
-            background: #00d9ff;
-            border-color: #00d9ff;
-            box-shadow: 0 0 8px #00d9ff;
+            background: #00d9ff; border-color: #00d9ff; box-shadow: 0 0 8px #00d9ff;
         }
 
-        /* Botones generales */
         .btn-action-cyan {
-            background: #00b8d4;
-            color: #020817;
-            font-weight: 800;
-            border-radius: 10px;
-            box-shadow: 0 0 25px rgba(0, 184, 212, 0.4);
-            transition: all 0.3s ease;
+            background: #00b8d4; color: #020817; font-weight: 800; border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0, 184, 212, 0.4); transition: all 0.3s ease;
         }
-        .btn-action-cyan:hover {
-            background: #00d9ff;
-            box-shadow: 0 0 35px rgba(0, 217, 255, 0.6);
-            transform: scale(1.02);
-        }
+        .btn-action-cyan:hover { background: #00d9ff; box-shadow: 0 0 35px rgba(0, 217, 255, 0.6); transform: scale(1.02); }
 
-        /* Elementos Estructurales */
-        .sidebar { 
-            width: 250px; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            height: 100%; 
-            background: #030816; 
-            border-right: 1px solid rgba(255, 255, 255, 0.03); 
-            z-index: 50; 
-        }
-        .sidebar-link { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            padding: 12px 24px; 
-            color: #8a99ad; 
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer; 
-            border-left: 3px solid transparent;
-        }
+        .sidebar { width: 250px; position: fixed; top: 0; left: 0; height: 100%; background: #030816; border-right: 1px solid rgba(255, 255, 255, 0.03); z-index: 50; }
+        .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: #8a99ad; font-size: 0.9rem; font-weight: 500; cursor: pointer; border-left: 3px solid transparent; }
         .sidebar-link:hover { color: #ffffff; background: rgba(255,255,255,0.01); }
-        .sidebar-link.active { 
-            background: linear-gradient(90deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 217, 255, 0) 100%); 
-            color: var(--cyan); 
-            border-left-color: var(--cyan);
-        }
+        .sidebar-link.active { background: linear-gradient(90deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 217, 255, 0) 100%); color: var(--cyan); border-left-color: var(--cyan); }
         
-        .topbar { 
-            position: fixed; 
-            top: 0; 
-            left: 250px; 
-            right: 0; 
-            height: 70px; 
-            background: #020817; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03); 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 0 30px; 
-            z-index: 40; 
-        }
+        .topbar { position: fixed; top: 0; left: 250px; right: 0; height: 70px; background: #020817; border-bottom: 1px solid rgba(255, 255, 255, 0.03); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 40; }
         .main-content { margin-left: 250px; margin-top: 70px; padding: 40px; min-height: calc(100vh - 70px); }
         .section { display: none; }
         .section.active { display: block; }
         
-        /* Cajas de Paneles e Historial */
-        .timeline-box {
-            background: rgba(4, 11, 28, 0.6);
-            border: 1px solid rgba(0, 217, 255, 0.05);
-            border-radius: 16px;
-        }
-        .day-card {
-            background: #020714;
-            border: 1px solid rgba(255,255,255,0.02);
-            border-radius: 12px;
-        }
+        .timeline-box { background: rgba(4, 11, 28, 0.6); border: 1px solid rgba(0, 217, 255, 0.05); border-radius: 16px; }
+        .day-card { background: #020714; border: 1px solid rgba(255,255,255,0.02); border-radius: 12px; }
 
-        /* Burbujas del Chat de Wolf AI */
-        .chat-bubble {
-            padding: 12px 18px;
-            border-radius: 16px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            max-width: 75%;
-            margin-bottom: 4px;
-            animation: bubbleAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        .chat-bot {
-            background-color: #09122a;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            align-self: flex-start;
-            color: #f1f5f9;
-            border-top-left-radius: 4px;
-        }
-        .chat-user {
-            background-color: #00b8d4;
-            color: #020817;
-            font-weight: 500;
-            align-self: flex-end;
-            border-top-right-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0, 184, 212, 0.2);
-        }
-        .chat-inline-btn {
-            background-color: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            transition: all 0.2s ease;
-        }
-        .chat-inline-btn:hover {
-            background-color: rgba(0, 217, 255, 0.1);
-            border-color: var(--cyan);
-            color: var(--cyan);
-        }
-        .quick-reply-btn {
-            background-color: #060f26;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #94a3b8;
-            transition: all 0.2s ease;
-        }
-        .quick-reply-btn:hover {
-            background-color: #0c1c45;
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        .recommendation-card {
-            background-color: #050d21;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            transition: all 0.2s ease;
-        }
-        .recommendation-card:hover {
-            background-color: #081533;
-            border-color: rgba(0, 217, 255, 0.15);
-        }
-        .breathing-box-step {
-            border-left: 3px solid var(--cyan);
-            background-color: rgba(0, 217, 255, 0.02);
-        }
+        .chat-bubble { padding: 12px 18px; border-radius: 16px; font-size: 0.9rem; line-height: 1.5; max-width: 75%; margin-bottom: 4px; animation: bubbleAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .chat-bot { background-color: #09122a; border: 1px solid rgba(255, 255, 255, 0.03); align-self: flex-start; color: #f1f5f9; border-top-left-radius: 4px; }
+        .chat-user { background-color: #00b8d4; color: #020817; font-weight: 500; align-self: flex-end; border-top-right-radius: 4px; box-shadow: 0 4px 15px rgba(0, 184, 212, 0.2); }
+        .chat-inline-btn { background-color: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; transition: all 0.2s ease; }
+        .chat-inline-btn:hover { background-color: rgba(0, 217, 255, 0.1); border-color: var(--cyan); color: var(--cyan); }
+        .quick-reply-btn { background-color: #060f26; border: 1px solid rgba(255, 255, 255, 0.03); padding: 8px 16px; border-radius: 10px; font-size: 0.8rem; font-weight: 500; color: #94a3b8; transition: all 0.2s ease; }
+        .quick-reply-btn:hover { background-color: #0c1c45; color: #ffffff; border-color: rgba(255, 255, 255, 0.1); }
+        .recommendation-card { background-color: #050d21; border: 1px solid rgba(255, 255, 255, 0.02); transition: all 0.2s ease; }
+        .recommendation-card:hover { background-color: #081533; border-color: rgba(0, 217, 255, 0.15); }
+        .breathing-box-step { border-left: 3px solid var(--cyan); background-color: rgba(0, 217, 255, 0.02); }
 
-        .toast { 
-            position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
-            background: #00d9ff; 
-            color: #020817; 
-            padding: 16px 28px; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            z-index: 9999; 
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-            transform: translateY(150px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
+        .toast { position: fixed; bottom: 30px; right: 30px; background: #00d9ff; color: #020817; padding: 16px 28px; border-radius: 12px; font-weight: 700; z-index: 9999; box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3); transform: translateY(150px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .toast.show { transform: translateY(0); }
         
         @keyframes bubbleAppear {
@@ -234,7 +95,6 @@
 
         @media (max-width: 1024px) {
             .sidebar { transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); }
             .topbar { left: 0; padding: 0 20px; }
             .main-content { margin-left: 0; padding: 20px; }
         }
@@ -304,7 +164,8 @@
         <header class="topbar">
             <div class="flex items-center gap-2">
                 <span id="user-display-name" class="text-sm font-semibold text-white">Cargando...</span>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold uppercase tracking-wider">Manada activa</span>
+                <span id="master-badge" class="hidden text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 font-black uppercase tracking-wider border border-cyan-500/30">ROL MÁSTER DECE</span>
+                <span id="student-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold uppercase tracking-wider">Manada activa</span>
             </div>
             <div class="flex items-center gap-4">
                 <div class="bg-[#040c24] border border-white/5 rounded-xl px-4 py-1.5 flex items-center gap-2 text-sm">
@@ -402,22 +263,12 @@
                         <div class="day-card p-3 flex flex-col items-center" data-day="Sáb"><span class="text-[11px] text-slate-400 font-medium mb-1">Sáb</span><div class="slot-visual font-bold text-xs text-slate-600">-</div></div>
                         <div class="day-card p-3 flex flex-col items-center" data-day="Dom"><span class="text-[11px] text-slate-400 font-medium mb-1">Dom</span><div class="slot-visual font-bold text-xs text-slate-600">-</div></div>
                     </div>
-                    <div class="text-center text-[11px] text-slate-400 border-t border-white/5 pt-3">
-                        Registra tus emociones todos los días para fortalecer tu bienestar emocional.<br>
-                        <span class="text-cyan-400 font-bold">+10 Eight-Coins por registro diario ✓</span>
-                    </div>
-                </div>
-
-                <div id="dece-alert" class="hidden rounded-xl p-4 border border-red-500/20 bg-red-950/20 max-w-xl mx-auto mt-6 flex items-center gap-3 animate-pulse">
-                    <div class="text-lg">🚨</div>
-                    <p class="text-xs text-red-400 font-medium">Alerta preventiva generada para el DECE: se detectaron 3 emociones negativas consecutivas.</p>
                 </div>
             </section>
 
             <section class="section" id="page-wolfai">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                    
-                    <div class="lg:col-span-2 flex flex-col rounded-2xl border border-white/5 bg-[#040a17]/40 overflow-hidden min-h-[580px] shadow-xl relative">
+                    <div class="lg:col-span-2 flex flex-col rounded-2xl border border-white/5 bg-[#040a17]/40 overflow-hidden min-h-[450px] shadow-xl relative">
                         <div class="p-4 border-b border-white/5 bg-[#020817]/40 flex items-center gap-3">
                             <i data-lucide="bot" class="w-5 h-5 text-cyan-400"></i>
                             <div>
@@ -425,22 +276,19 @@
                                 <p class="text-[11px] text-slate-400">Tu asistente emocional inteligente 🐾</p>
                             </div>
                         </div>
-
-                        <div id="chat-messages-container" class="flex-1 p-5 overflow-y-auto space-y-4 flex flex-col max-h-[340px]">
+                        <div id="chat-messages-container" class="flex-1 p-5 overflow-y-auto space-y-4 flex flex-col max-h-[300px]">
                             <div id="wolf-welcome-block" class="flex flex-col items-center text-center my-4 space-y-2">
-                                <img src="MASCOTA" class="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(0,217,255,0.2)]" onerror="this.src='GO FONDO AZU.png'">
+                                <img src="MASCOTA" class="w-20 h-20 object-contain" onerror="this.src='GO FONDO AZU.png'">
                                 <h2 class="text-base font-bold text-white">Hola, soy Wolf AI 🐾</h2>
                                 <p class="text-xs text-slate-400 max-w-xs">Estoy aquí para escucharte. ¿Cómo te sientes hoy?</p>
                             </div>
                         </div>
-
                         <div class="px-4 py-2 flex flex-wrap gap-1.5 border-t border-white/5 bg-[#020817]/20">
                             <button class="quick-reply-btn" data-text="Me siento estresado">😟 Me siento estresado</button>
                             <button class="quick-reply-btn" data-text="Estoy triste">😢 Estoy triste</button>
                             <button class="quick-reply-btn" data-text="Tengo ansiedad">😟 Tengo ansiedad</button>
                             <button class="quick-reply-btn" data-text="Quiero calmarme">🌿 Quiero calmarme</button>
                         </div>
-
                         <div class="p-3 bg-[#020817]/40 flex flex-col gap-2">
                             <div class="flex gap-2 relative items-center">
                                 <input type="text" id="chat-user-input" placeholder="Escribe tu mensaje aquí..." class="w-full bg-[#020817] border border-white/5 rounded-xl pl-4 pr-12 py-3 text-xs outline-none focus:border-cyan-500 text-white">
@@ -448,51 +296,70 @@
                                     <i data-lucide="send" class="w-3.5 h-3.5"></i>
                                 </button>
                             </div>
-                            <p class="text-[10px] text-center text-slate-500 font-medium">
-                                Wolf AI no reemplaza al DECE ni a un profesional de la salud. Solo orienta de forma preventiva.
-                            </p>
                         </div>
                     </div>
-
                     <div class="space-y-4">
                         <div class="rounded-2xl border border-white/5 bg-[#040a17]/40 p-4">
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">Recomendaciones para ti</h3>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">Recomendaciones</h3>
                             <div class="space-y-2">
                                 <div class="recommendation-card p-3 rounded-xl flex items-center justify-between cursor-pointer group" data-action="respiracion">
-                                    <h4 class="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">Ejercicio de respiración 4-4-4</h4>
-                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-1 transition-all"></i>
-                                </div>
-                                <div class="recommendation-card p-3 rounded-xl flex items-center justify-between cursor-pointer group" data-action="pausa_activa">
-                                    <h4 class="text-xs font-bold text-white group-hover:text-cyan-400">Pausa activa</h4>
+                                    <h4 class="text-xs font-bold text-white group-hover:text-cyan-400">Ejercicio de respiración 4-4-4</h4>
                                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
                                 </div>
-                                <div class="recommendation-card p-3 rounded-xl flex items-center justify-between cursor-pointer group" data-action="animo">
-                                    <h4 class="text-xs font-bold text-white group-hover:text-cyan-400">Mensaje de ánimo</h4>
-                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
-                                </div>
-                                <div class="recommendation-card p-3 rounded-xl flex items-center justify-between cursor-pointer group" data-action="adulto">
-                                    <h4 class="text-xs font-bold text-white group-hover:text-cyan-400">Habla con un adulto de confianza</h4>
-                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="rounded-2xl p-4 border border-emerald-500/10 bg-emerald-950/5 flex items-center gap-3">
-                            <i data-lucide="link-2" class="w-4 h-4 text-emerald-400"></i>
-                            <div>
-                                <h4 class="text-[11px] font-extrabold uppercase text-emerald-400">Protección Blockchain</h4>
-                                <p class="text-[10px] text-slate-400">Cada registro y recompensa queda respaldada.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <section class="section" id="page-paneldece">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+                    <div>
+                        <h1 class="text-2xl font-black text-white">Consola de Control DECE</h1>
+                        <p class="text-xs text-slate-400">Monitoreo de alertas tempranas e índice general de Eight-Coins</p>
+                    </div>
+                    
+                    <button id="btn-export-csv" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-900 font-extrabold text-xs px-6 py-3 rounded-xl shadow-lg shadow-emerald-500/10 flex items-center gap-2 uppercase tracking-wider transition-all">
+                        <i data-lucide="download" class="w-4 h-4"></i> Exportar Base Completa (CSV)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="rounded-xl border border-white/5 bg-[#040a17] p-4 text-center">
+                        <span class="text-slate-400 text-[11px] uppercase font-bold">Total Estudiantes</span>
+                        <span id="dece-stat-students" class="block text-2xl font-black text-cyan-400 mt-1">0</span>
+                    </div>
+                    <div class="rounded-xl border border-white/5 bg-[#040a17] p-4 text-center">
+                        <span class="text-slate-400 text-[11px] uppercase font-bold">Eight-Coins en Circulación</span>
+                        <span id="dece-stat-coins" class="block text-2xl font-black text-yellow-500 mt-1">0 EC</span>
+                    </div>
+                    <div class="rounded-xl border border-white/5 bg-[#040a17] p-4 text-center">
+                        <span class="text-slate-400 text-[11px] uppercase font-bold">Estado del Servidor</span>
+                        <span class="block text-2xl font-black text-emerald-400 mt-1">ONLINE</span>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl border border-white/5 bg-[#040a17] overflow-hidden">
+                    <table class="table-wolves w-full">
+                        <thead class="bg-[#020817]">
+                            <tr>
+                                <th>UID Estudiante</th>
+                                <th>Nombre</th>
+                                <th>Curso</th>
+                                <th>Saldo Billetera</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-students-tbody">
+                            <tr><td colspan="4" class="text-center p-6 text-slate-500">Cargando base estructurada desde Firestore Cloud...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
             <section class="section" id="page-retos"><h1 class="text-xl font-bold text-cyan-400">Misiones de la Manada</h1></section>
-            <section class="section" id="page-wallet"><h1 class="text-xl font-bold text-cyan-400">Billetera Virtual Sincronizada</h1></section>
-            <section class="section" id="page-paneldece"><h1 class="text-xl font-bold text-cyan-400">Panel Preventivo DECE</h1></section>
-            <section class="section" id="page-tienda"><h1 class="text-xl font-bold text-cyan-400">Tienda Oficial de Canjeo</h1></section>
-            <section class="section" id="page-proyeccion"><h1 class="text-xl font-bold text-cyan-400">Métricas & Reportes Generales</h1></section>
+            <section class="section" id="page-wallet"><h1 class="text-xl font-bold text-cyan-400">Mi Wallet</h1></section>
+            <section class="section" id="page-tienda"><h1 class="text-xl font-bold text-cyan-400">Tienda</h1></section>
+            <section class="section" id="page-proyeccion"><h1 class="text-xl font-bold text-cyan-400">Métricas institucionales</h1></section>
             <section class="section" id="page-equipo"><h1 class="text-xl font-bold text-cyan-400">Miembros de la Manada</h1></section>
         </main>
     </div>
@@ -501,7 +368,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -522,25 +389,22 @@
         let coins = 1250;
         let selectedEmotion = null;
         let isSignUpMode = false;
+        let cachedStudentsData = []; // Caché global para armar el CSV de inmediato
 
         const imgMapping = {
-            alegre: "TRANQUILO",
-            tranquilo: "TRANQUILO",
-            triste: "GESTIONALA TRISTEZA.png",
-            ansioso: "CONTROLA LA ANSIEDAG",
-            enojado: "MAAESA TU RA.png"
+            alegre: "TRANQUILO", tranquilo: "TRANQUILO", triste: "GESTIONALA TRISTEZA.png", ansioso: "CONTROLA LA ANSIEDAG", enojado: "MAAESA TU RA.png"
         };
 
         const botResponses = {
-            estresado: "Comprendo tu situación. El estrés escolar es manejable si realizamos pausas activas. Te sugiero iniciar el ejercicio de respiración guiada 4-4-4.",
-            triste: "No estás solo en la manada. Sentirse decaído es válido. ¿Te gustaría leer un mensaje de ánimo o prefieres conversar con un adulto de confianza?",
-            ansioso: "La ansiedad altera los pensamientos. Concentrémonos en el presente realizando una rutina corta de respiración profunda.",
-            calmarme: "Excelente elección. Iniciemos el ciclo de relajación controlada. Monitorea los pasos en tu pantalla.",
-            default: "He guardado tu estado de forma preventiva en la nube. Tu bienestar es nuestra prioridad número uno. 🐾"
+            estresado: "El estrés escolar es manejable. Te sugiero iniciar el ejercicio de respiración guiada 4-4-4.",
+            triste: "No estás solo en la manada. ¿Te gustaría leer un mensaje de ánimo?",
+            ansioso: "Concentrémonos en el presente realizando una rutina de respiración profunda.",
+            calmarme: "Excelente elección. Monitorea los pasos de relajación en tu pantalla.",
+            default: "He guardado tu estado preventivo en la nube de forma transparente. 🐾"
         };
 
         // ==========================================
-        // 🔄 MANEJADOR DE AUTENTICACIÓN
+        // 🔄 MANEJADOR DE AUTENTICACIÓN Y ROLES
         // ==========================================
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -548,6 +412,17 @@
                 document.getElementById('auth-overlay').classList.add('hidden');
                 document.getElementById('app-wrapper').classList.remove('hidden');
                 
+                // CONTROL DE ROLES: Verificar si es el usuario master administrativo
+                if (user.email === "anita@eightacademy.edu.ec") {
+                    document.getElementById('master-badge').classList.remove('hidden');
+                    document.getElementById('student-badge').classList.add('hidden');
+                    document.getElementById('btn-export-csv').classList.remove('hidden');
+                } else {
+                    document.getElementById('master-badge').classList.add('hidden');
+                    document.getElementById('student-badge').classList.remove('hidden');
+                    document.getElementById('btn-export-csv').classList.add('hidden');
+                }
+
                 const userDocRef = doc(db, "estudiantes", currentUserUID);
                 const docSnap = await getDoc(userDocRef);
                 
@@ -562,6 +437,7 @@
                 renderCoinsUI();
                 renderWeeklyDashboard();
                 activarCanalesEscucha();
+                cargarTablaGlobalMaster();
             } else {
                 currentUserUID = null;
                 document.getElementById('auth-overlay').classList.remove('hidden');
@@ -569,6 +445,7 @@
             }
         });
 
+        // Alternador formularios
         document.getElementById('btn-auth-toggle').addEventListener('click', () => {
             isSignUpMode = !isSignUpMode;
             document.getElementById('field-name').classList.toggle('hidden', !isSignUpMode);
@@ -648,7 +525,7 @@
         }
 
         // ==========================================
-        // 🤖 SISTEMA CHAT INTERACTIVO WOLF AI
+        // 🤖 CHAT INTERACTIVO WOLF AI
         // ==========================================
         const chatBox = document.getElementById("chat-messages-container");
         const chatInput = document.getElementById("chat-user-input");
@@ -709,18 +586,6 @@
                     injectBubble("Vamos a hacer respiración 4-4-4 🫁. Repite 3 veces para calmar el cuerpo.", "bot", customHTML);
                     await syncCoins(15);
                 }, 600);
-            } else if(action === "animo") {
-                injectBubble("Solicito un mensaje motivacional.", "user");
-                setTimeout(async () => {
-                    injectBubble("Recuerda: eres capaz de grandes logros. Tu manada está contigo para apoyarte en cada paso. 🐺✨", "bot");
-                    await syncCoins(15);
-                }, 600);
-            } else if(action === "adulto") {
-                injectBubble("Requiero ayuda presencial.", "user");
-                setTimeout(async () => {
-                    injectBubble("No estás solo. Puedes acudir directamente al departamento del DECE para conversar con la Lcda. Anita Parreño.", "bot");
-                    await syncCoins(15);
-                }, 600);
             }
         });
 
@@ -733,8 +598,85 @@
         }
 
         // ==========================================
-        // 📊 SISTEMA NAVEGACIÓN GLOBAL
+        // 📥 LÓGICA DE CONTROL GLOBAL Y EXPORTACIÓN CSV
         // ==========================================
+        
+        // Escucha en vivo de la base de datos de todos los estudiantes inscritos
+        function cargarTablaGlobalMaster() {
+            onSnapshot(collection(db, "estudiantes"), (snap) => {
+                const tbody = document.getElementById("master-students-tbody");
+                if (!tbody) return;
+
+                tbody.innerHTML = "";
+                cachedStudentsData = []; // Resetear caché
+                let totalStudents = 0;
+                let circulationCoins = 0;
+
+                if (snap.empty) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-slate-500">No hay estudiantes registrados en Firebase.</td></tr>`;
+                    return;
+                }
+
+                snap.forEach((doc) => {
+                    const id = doc.id;
+                    const data = doc.data();
+                    totalStudents++;
+                    circulationCoins += parseInt(data.coins || 0);
+
+                    // Guardar en la caché para la descarga del archivo CSV
+                    cachedStudentsData.push({
+                        uid: id,
+                        nombre: data.nombre || "Sin nombre",
+                        curso: data.curso || "7A",
+                        coins: data.coins || 0
+                    });
+
+                    // Inyectar fila visual en la tabla del panel institucional
+                    tbody.innerHTML += `
+                        <tr>
+                            <td class="text-xs text-slate-500 font-mono">${id}</td>
+                            <td class="font-bold text-slate-200">${data.nombre || 'Estudiante'}</td>
+                            <td class="text-slate-400">${data.curso || '7A'}</td>
+                            <td class="font-extrabold text-cyan-400">${(data.coins || 0).toLocaleString('es-ES')} EC</td>
+                        </tr>
+                    `;
+                });
+
+                // Actualizar los indicadores métricos del panel
+                document.getElementById("dece-stat-students").textContent = totalStudents;
+                document.getElementById("dece-stat-coins").textContent = `${circulationCoins.toLocaleString('es-ES')} EC`;
+            });
+        }
+
+        // 🚀 ALGORITMO EXPORTADOR DE CSV NATIVO EN UN CLIC
+        document.getElementById("btn-export-csv").addEventListener("click", () => {
+            if (cachedStudentsData.length === 0) {
+                showToast("No hay datos disponibles para exportar aún.");
+                return;
+            }
+
+            // Encabezados de las columnas del reporte estructurado
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "UID Estudiante,Nombre Completo,Curso Asignado,Saldo Eight-Coins\n";
+
+            // Recorrer los registros de los alumnos e inyectar filas de texto separadas por comas
+            cachedStudentsData.forEach((row) => {
+                csvContent += `"${row.uid}","${row.nombre}","${row.curso}",${row.coins}\n`;
+            });
+
+            // Codificar el contenido de texto plano e inyectar descarga simulada en el navegador
+            const encodedUri = encodeURI(csvContent);
+            const downloadLink = document.createElement("a");
+            downloadLink.setAttribute("href", encodedUri);
+            downloadLink.setAttribute("download", `reporte_manada_wolves_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(downloadLink);
+            
+            downloadLink.click(); // Forzar clic invisible para iniciar la descarga del archivo
+            document.body.removeChild(downloadLink);
+
+            showToast("📥 Archivo CSV descargado con éxito.");
+        });
+
         function renderCoinsUI() {
             document.getElementById('topbar-coins').textContent = coins.toLocaleString('es-ES');
         }

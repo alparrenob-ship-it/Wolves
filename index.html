@@ -167,7 +167,7 @@
 
     <nav class="sidebar" id="sidebar" aria-label="Navegación principal">
         <div class="p-5 text-center border-b border-white/10">
-            <img class="w-16 h-16 object-contain mx-auto mb-2" src="img/logo-wolves.png" alt="Logo Wolves">
+            <img class="w-16 h-16 object-contain mx-auto mb-2 rounded-full" src="GO FONDO AZU.png" alt="Logo Wolves">
             <div class="text-xl font-bold tracking-wider" style="color:var(--cyan)">WOLVES</div>
             <div class="text-xs mt-1" style="color:var(--muted)">Bienestar Emocional</div>
         </div>
@@ -236,10 +236,7 @@
                 </div>
                 <div class="relative flex items-center justify-center min-h-[350px]">
                     <div class="hero-circle"></div>
-                    <div class="glass p-5 text-center relative z-10 max-w-[240px] glow">
-                        <p class="text-sm font-bold text-cyan-400">🐺 ¡Hola, soy Wolf AI!</p>
-                        <p class="text-xs mt-2" style="color:var(--muted)">Conectado a Firebase en tiempo real para proteger tu manada.</p>
-                    </div>
+                    <img src="MASCOTA" class="w-56 h-56 object-contain relative z-10 drop-shadow-[0_0_20px_rgba(0,217,255,0.3)] animate-bounce" style="animation-duration: 4s;" alt="Lobo AI Mascot">
                 </div>
             </div>
 
@@ -274,35 +271,35 @@
                 <div class="emotion-card-wrapper">
                     <input type="radio" name="emotion" id="emotion-alegre" value="alegre" class="hidden">
                     <label for="emotion-alegre" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
-                        <img src="img/avatar-alegre.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Alegre">
+                        <img src="TRANQUILO" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Alegre">
                         <div class="font-bold text-sm text-cyan-400">Alegre</div>
                     </label>
                 </div>
                 <div class="emotion-card-wrapper">
                     <input type="radio" name="emotion" id="emotion-tranquilo" value="tranquilo" class="hidden">
                     <label for="emotion-tranquilo" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
-                        <img src="img/avatar-tranquilo.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Tranquilo">
+                        <img src="TRANQUILO" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Tranquilo">
                         <div class="font-bold text-sm text-blue-400">Tranquilo</div>
                     </label>
                 </div>
                 <div class="emotion-card-wrapper">
                     <input type="radio" name="emotion" id="emotion-triste" value="triste" class="hidden">
                     <label for="emotion-triste" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
-                        <img src="img/avatar-triste.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Triste">
+                        <img src="GESTIONALA TRISTEZA.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Triste">
                         <div class="font-bold text-sm text-purple-400">Triste</div>
                     </label>
                 </div>
                 <div class="emotion-card-wrapper">
                     <input type="radio" name="emotion" id="emotion-ansioso" value="ansioso" class="hidden">
                     <label for="emotion-ansioso" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
-                        <img src="img/avatar-ansioso.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Ansioso">
+                        <img src="CONTROLA LA ANSIEDAG" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Ansioso">
                         <div class="font-bold text-sm text-yellow-400">Ansioso</div>
                     </label>
                 </div>
                 <div class="emotion-card-wrapper">
                     <input type="radio" name="emotion" id="emotion-enojado" value="enojado" class="hidden">
                     <label for="emotion-enojado" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
-                        <img src="img/avatar-enojado.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Enojado">
+                        <img src="MAAESA TU RA.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Enojado">
                         <div class="font-bold text-sm text-red-400">Enojado</div>
                     </label>
                 </div>
@@ -411,7 +408,7 @@
         <section class="section" id="page-equipo">
             <h1 class="text-2xl font-bold mb-4 text-cyan-400">Miembros de la Manada</h1>
             <div class="glass p-4 max-w-md text-center">
-                <img src="img/camilo-isava.jpg" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 border-2 border-cyan-400" alt="Camilo Isava">
+                <img src="ORIGINAL LAWR.jpg" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 border-2 border-cyan-400" alt="Camilo Isava">
                 <h3 class="font-bold text-white text-lg">Camilo Isava</h3>
                 <p class="text-xs text-cyan-400 font-semibold mb-2">Expositor Oficial del Equipo</p>
                 <p class="text-xs text-slate-400">Séptimo de Básica - Unidad Educativa Eight Academy.</p>
@@ -567,7 +564,7 @@
                 emotion: selectedEmotion, date: new Date().toISOString()
             });
             await syncCoins(10);
-            showToast('Estado enviado a Firestore: +10 Eight-Coins');
+            showToast('Estado enviado a Firestore: +10 Daily Coins');
         });
 
         document.querySelectorAll('.emotion-card-wrapper').forEach(wrapper => {
@@ -580,9 +577,7 @@
 
         document.getElementById('hamburger').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
         
-        // =========================================================================
-        // 🔥 ASIGNACIÓN DE CLICS AUTOMÁTICOS PARA EL MENÚ LATERAL (ARREGLADO)
-        // =========================================================================
+        // Manejador del menú arreglado
         document.querySelectorAll('.sidebar-link').forEach(link => {
             link.addEventListener('click', () => {
                 window.navigate(link.dataset.page);

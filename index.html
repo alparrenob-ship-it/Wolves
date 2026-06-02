@@ -1,573 +1,606 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Los Wolves - App de Bienestar Estudiantil</title>
+    <title>WOLVES - Bienestar Emocional</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #161b26;
-            --text-color: #f3f4f6;
-            --text-muted: #9ca3af;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --success-color: #10b981;
-            --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            --border-color: #242b3d;
+            --navy: #020817;
+            --navy-light: #0a1628;
+            --cyan: #00d9ff;
+            --cyan-dim: rgba(0, 217, 255, 0.15);
+            --glass: rgba(8, 24, 55, 0.75);
+            --glass-border: rgba(0, 217, 255, 0.12);
+            --text: #ffffff;
+            --muted: #9fb4d8;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            margin: 0; 
+            background: var(--navy); 
+            color: var(--text); 
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding-bottom: 60px;
+        .glass { 
+            background: var(--glass); 
+            border: 1px solid var(--glass-border); 
+            backdrop-filter: blur(12px); 
+            border-radius: 16px; 
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .glass-sm { 
+            background: var(--glass); 
+            border: 1px solid var(--glass-border); 
+            backdrop-filter: blur(8px); 
+            border-radius: 12px; 
         }
-
-        /* Hero Section */
-        header {
-            text-align: center;
-            padding: 80px 20px;
-            background: radial-gradient(circle at top, rgba(59, 130, 246, 0.15), transparent 60%);
-            border-bottom: 1px solid var(--border-color);
-            border-radius: 0 0 24px 24px;
+        .glow { box-shadow: 0 0 20px rgba(0,217,255,0.25); }
+        .glow-hover:hover { 
+            box-shadow: 0 0 24px rgba(0,217,255,0.35); 
+            border-color: var(--cyan); 
+            transform: translateY(-2px); 
         }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-color);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .btn-cyan { 
+            background: linear-gradient(135deg, #00d9ff, #00b8d4); 
+            color: #020817; 
+            font-weight: 700; 
+            border: none; 
+            border-radius: 12px; 
+            padding: 14px 32px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            font-size: 0.95rem; 
         }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-            background: linear-gradient(to right, #ffffff, #9ca3af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 4px 24px rgba(0,217,255,0.4); }
+        .btn-outline { 
+            background: transparent; 
+            border: 2px solid var(--cyan); 
+            color: var(--cyan); 
+            border-radius: 12px; 
+            padding: 13px 32px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
         }
-
-        .slogan {
-            font-size: 1.25rem;
-            color: var(--success-color);
-            font-style: italic;
-            margin-bottom: 16px;
-            font-weight: 500;
+        .btn-outline:hover { background: rgba(0,217,255,0.1); }
+        .sidebar { 
+            width: 240px; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            height: 100%; 
+            background: var(--navy-light); 
+            border-right: 1px solid var(--glass-border); 
+            z-index: 50; 
+            overflow-y: auto; 
+            transition: transform 0.3s; 
         }
-
-        .lead {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 750px;
-            margin: 0 auto 30px auto;
+        .sidebar-link { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 11px 20px; 
+            color: var(--muted); 
+            text-decoration: none; 
+            border-radius: 10px; 
+            margin: 2px 12px; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
         }
-
-        /* Section Layout */
-        section {
-            margin-top: 70px;
+        .sidebar-link:hover, .sidebar-link.active { background: var(--cyan-dim); color: var(--cyan); }
+        .topbar { 
+            position: fixed; 
+            top: 0; 
+            left: 240px; 
+            right: 0; 
+            height: 60px; 
+            background: var(--navy-light); 
+            border-bottom: 1px solid var(--glass-border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 0 24px; 
+            z-index: 40; 
         }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
+        .main-content { margin-left: 240px; margin-top: 60px; padding: 28px; min-height: calc(100vh - 60px); }
+        .section { display: none; }
+        .section.active { display: block; }
+        .emotion-card { cursor: pointer; transition: all 0.3s; }
+        .emotion-card:hover, .emotion-card.selected { 
+            border-color: var(--cyan); 
+            box-shadow: 0 0 16px rgba(0,217,255,0.3); 
+            transform: scale(1.05); 
         }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--gradient-accent);
-            border-radius: 2px;
+        .emotion-card-wrapper input[type="radio"]:checked + label { 
+            border-color: var(--cyan) !important; 
+            box-shadow: 0 0 20px rgba(0,217,255,0.4) !important; 
         }
-
-        /* Feature Row (Problem / Solution / Objective) */
-        .project-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-top: 20px;
+        .toast { 
+            position: fixed; 
+            bottom: -100px; 
+            right: 24px; 
+            background: linear-gradient(135deg, #00d9ff, #00b8d4); 
+            color: #020817; 
+            padding: 14px 24px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            z-index: 999; 
+            opacity: 0; 
+            transition: all 0.4s ease-in-out; 
         }
-
-        .summary-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 28px;
-        }
-
-        .summary-card h3 {
-            font-size: 1.35rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .summary-card ul {
-            list-style-type: none;
-            margin-top: 10px;
-        }
-
-        .summary-card li {
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            position: relative;
-            padding-left: 18px;
-        }
-
-        .summary-card li::before {
-            content: "•";
-            color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        /* Grid for Resources (Exactly 2 Columns for your 2 PDFs) */
-        .grid-resources {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 24px;
-        }
-
-        @media (max-width: 600px) {
-            .grid-resources {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 28px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-
-        .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-            flex-grow: 1;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background-color 0.2s ease;
-            text-align: center;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        /* Store / Material POP Section con Fotos Reales */
-        .grid-store {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .store-item {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .store-item:hover {
-            border-color: rgba(16, 185, 129, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .store-img-container {
-            width: 100%;
-            height: 240px;
-            background-color: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .store-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .store-item:hover .store-img {
-            transform: scale(1.04);
-        }
-
-        .store-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 6px;
-            color: white;
-        }
-
-        .store-price {
-            font-size: 1.35rem;
-            color: var(--success-color);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .btn-store {
-            background-color: rgba(16, 185, 129, 0.15);
-            border: 1px solid var(--success-color);
-            color: #a7f3d0;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .btn-store:hover {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        /* Team Section */
-        .grid-team {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .team-member {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .avatar {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: var(--gradient-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
-            flex-shrink: 0;
-        }
-
-        .member-info h3 {
-            font-size: 1.15rem;
-            margin-bottom: 2px;
-            color: white;
-        }
-
-        .member-info p {
-            color: var(--accent-color);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .coordination {
-            margin-top: 30px;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.02);
-            border: 1px dashed var(--border-color);
-            padding: 15px;
-            border-radius: 12px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 90px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-        }
-
-        /* Responsive adjustments */
+        .toast.show { bottom: 24px; opacity: 1; }
+        .chat-bubble { padding: 12px 16px; border-radius: 12px; max-width: 80%; margin-bottom: 10px; font-size: 0.9rem; }
+        .chat-bot { background: rgba(0,217,255,0.08); border: 1px solid rgba(0,217,255,0.2); align-self: flex-start; }
+        .chat-user { background: rgba(255,255,255,0.08); align-self: flex-end; margin-left: auto; }
+        .progress-bar { background: rgba(255,255,255,0.08); border-radius: 999px; height: 6px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #00d9ff, #00b8d4); border-radius: 999px; transition: width 0.5s; }
+        .metric-value { font-size: 1.8rem; font-weight: 800; color: var(--cyan); }
+        .table-wolves { width: 100%; border-collapse: collapse; }
+        .table-wolves th { text-align: left; padding: 10px 12px; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid var(--glass-border); }
+        .table-wolves td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.85rem; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; }
+        .badge-red { background: rgba(255,71,87,0.2); color: #ff4757; }
+        .badge-yellow { background: rgba(255,193,7,0.2); color: #ffc107; }
+        .badge-green { background: rgba(0,230,118,0.2); color: #00e676; }
+        .hamburger { display: none; position: fixed; top: 14px; left: 14px; z-index: 60; background: var(--navy-light); border: 1px solid var(--glass-border); border-radius: 8px; padding: 8px; cursor: pointer; color: var(--cyan); }
+        .hero-circle { position: absolute; width: 280px; height: 280px; border-radius: 50%; border: 1px solid rgba(0,217,255,0.15); top: 50%; left: 50%; transform: translate(-50%,-50%); }
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            header { padding: 50px 20px; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .topbar { left: 0; }
+            .main-content { margin-left: 0; }
+            .hamburger { display: block; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <span class="badge">Hackathon Eight Academy 2025-2026</span>
-            <h1>Los Wolves 🐺</h1>
-            <p class="slogan">"Tu bienestar es clave para aprender mejor."</p>
-            <p class="lead">Prototipo oficial de nuestra Aplicación Digital de Bienestar Estudiantil diseñada para fortalecer la salud emocional, la empatía y la autorregulación dentro de la comunidad educativa.</p>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <i data-lucide="menu" style="width:22px;height:22px"></i>
+    </button>
+
+    <nav class="sidebar" id="sidebar" aria-label="Navegación principal">
+        <div class="p-5 text-center border-b border-white/10">
+            <img class="w-16 h-16 object-contain mx-auto mb-2" src="img/logo-wolves.png" alt="Logo Wolves">
+            <div class="text-xl font-bold tracking-wider" style="color:var(--cyan)">WOLVES</div>
+            <div class="text-xs mt-1" style="color:var(--muted)">Bienestar Emocional</div>
+        </div>
+        <div class="py-3">
+            <div class="sidebar-link active" data-page="inicio"><i data-lucide="home" style="width: 17px; height: 17px"></i> Inicio</div>
+            <div class="sidebar-link" data-page="moodcheck"><i data-lucide="heart" style="width:17px;height: 17px"></i> Mood Check</div>
+            <div class="sidebar-link" data-page="wolfai"><i data-lucide="bot" style="width: 17px; height: 17px"></i> Wolf AI</div>
+            <div class="sidebar-link" data-page="retos"><i data-lucide="target" style="width:17px;height: 17px"></i> Retos</div>
+            <div class="sidebar-link" data-page="wallet"><i data-lucide="wallet" style="width:17px;height: 17px"></i> Wallet</div>
+            <div class="sidebar-link" data-page="paneldece"><i data-lucide="shield" style="width:17px;height: 17px"></i> Panel DECE</div>
+            <div class="sidebar-link" data-page="tienda"><i data-lucide="shopping-bag" style="width:17px;height: 17px"></i> Tienda</div>
+            <div class="sidebar-link" data-page="proyeccion"><i data-lucide="bar-chart-2" style="width:17px;height: 17px"></i> Proyección</div>
+            <div class="sidebar-link" data-page="equipo"><i data-lucide="users" style="width:17px;height: 17px"></i> Mi Manada</div>
+        </div>
+        <div class="px-4 pb-4 border-t border-white/10 mt-6 pt-6">
+            <div class="glass p-4 text-center" style="border-left:3px solid var(--cyan)">
+                <p class="text-xs font-bold mb-2 uppercase tracking-wide" style="color:var(--cyan)">Juntos somos más fuertes</p>
+                <p class="text-[11px]" style="color:var(--muted)">Cada emoción cuenta, cada elección importa.</p>
+            </div>
+        </div>
+    </nav>
+
+    <header class="topbar">
+        <div class="flex items-center gap-3">
+            <span class="text-sm ml-8 md:ml-0" style="color: var(--muted)">¡Hola, Estudiante!</span>
+            <span class="badge badge-green">Manada activa</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="glass-sm px-3 py-1 flex items-center gap-2 text-sm">
+                <span id="topbar-coins" class="font-bold" style="color:var(--cyan)">1,250</span>
+                <span style="color:var(--muted)">Eight-Coins</span>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-xs font-bold text-white">E</div>
         </div>
     </header>
 
-    <main class="container">
-        
-        <!-- Sobre el Proyecto -->
-        <section id="concepto">
-            <h2>Sobre el Proyecto</h2>
-            <div class="project-summary">
-                <div class="summary-card">
-                    <h3>🎯 Objetivo General</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Diseñar un prototipo de aplicación de bienestar estudiantil que fomente la salud emocional, la empatía y la autorregulación de los estudiantes de Eight Academy, mediante el uso creativo y responsable de la tecnología.</p>
+    <main class="main-content">
+
+        <section class="section active" id="page-inicio">
+            <div class="grid md:grid-cols-2 gap-8 mb-10 items-center">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4" style="color: var(--cyan)">BIENESTAR QUE PROTEGE LA MANADA</h1>
+                    <p class="mb-6" style="color: var(--muted)">Wolves te acompaña cada día para que reconozcas, entiendas y fortalezcas tus emociones.</p>
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <div class="glass-sm p-3">
+                            <div class="text-sm font-bold mb-1">IA Emocional</div>
+                            <div class="text-xs" style="color:var(--muted)">Wolf AI te escucha y te orienta.</div>
+                        </div>
+                        <div class="glass-sm p-3">
+                            <div class="text-sm font-bold mb-1">Prevención</div>
+                            <div class="text-xs" style="color:var(--muted)">Detectamos y acompañamos.</div>
+                        </div>
+                        <div class="glass-sm p-3">
+                            <div class="text-sm font-bold mb-1">Recompensas</div>
+                            <div class="text-xs" style="color:var(--muted)">Gana Eight-Coins por tu salud.</div>
+                        </div>
+                        <div class="glass-sm p-3">
+                            <div class="text-sm font-bold mb-1">Convivencia</div>
+                            <div class="text-xs" style="color:var(--muted)">Retos que unen al equipo.</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mb-4">
+                        <button class="btn-cyan shadow-lg" onclick="navigate('moodcheck')">INICIAR MOOD CHECK</button>
+                        <button class="btn-outline" onclick="navigate('wolfai')">HABLAR CON WOLF AI</button>
+                    </div>
                 </div>
-                <div class="summary-card">
-                    <h3>⚠️ Problema Identificado</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Estrés académico en momentos de evaluaciones, dificultades para reconocer y nombrar emociones, escasa práctica diaria de autorregulación y conflictos por falta de empatía o comunicación impulsiva.</p>
+                <div class="relative flex items-center justify-center min-h-[350px]">
+                    <div class="hero-circle"></div>
+                    <div class="glass p-5 text-center relative z-10 max-w-[240px] glow">
+                        <p class="text-sm font-bold text-cyan-400">🐺 ¡Hola, soy Wolf AI!</p>
+                        <p class="text-xs mt-2" style="color:var(--muted)">Conectado a Firebase en tiempo real para proteger tu manada.</p>
+                    </div>
                 </div>
-                <div class="summary-card">
-                    <h3>💡 Componentes Clave</h3>
-                    <ul>
-                        <li><strong>Mood Check:</strong> Registro diario de emociones por códigos de color.</li>
-                        <li><strong>Autorregulación:</strong> Ejercicios breves de respiración guiada (4-4-4).</li>
-                        <li><strong>Wolf AI:</strong> Asistente conversacional empático (Chatbot).</li>
-                        <li><strong>Blockchain:</strong> Transparencia e incentivos con Eight-Coins.</li>
-                    </ul>
+            </div>
+
+            <h2 class="text-xl font-bold mb-4 text-cyan-400">Acceso Rápido</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+                <div class="glass p-4 text-center cursor-pointer transition glow-hover" onclick="navigate('moodcheck')">
+                    <div class="font-semibold text-sm mb-1">Mood Check</div>
+                </div>
+                <div class="glass p-4 text-center cursor-pointer transition glow-hover" onclick="navigate('wolfai')">
+                    <div class="font-semibold text-sm mb-1">Wolf AI</div>
+                </div>
+                <div class="glass p-4 text-center cursor-pointer transition glow-hover" onclick="navigate('retos')">
+                    <div class="font-semibold text-sm mb-1">Retos</div>
+                </div>
+                <div class="glass p-4 text-center cursor-pointer transition glow-hover" onclick="navigate('wallet')">
+                    <div class="font-semibold text-sm mb-1">Wallet</div>
+                </div>
+                <div class="glass p-4 text-center cursor-pointer transition glow-hover" onclick="navigate('paneldece')">
+                    <div class="font-semibold text-sm mb-1">Panel DECE</div>
+                </div>
+                <div class="glass p-4 text-center cursor-pointer transition glow-hover" onclick="navigate('tienda')">
+                    <div class="font-semibold text-sm mb-1">Tienda</div>
                 </div>
             </div>
         </section>
 
-        <!-- Materiales del Proyecto -->
-        <section id="entregables">
-            <h2>Materiales del Proyecto</h2>
-            <div class="grid-resources">
-                
-                <div class="card">
-                    <div>
-                        <div class="card-icon">📊</div>
-                        <h3>Presentación Final</h3>
-                        <p>Diapositivas oficiales utilizadas en la defensa oral del proyecto. Contiene la metodología Design Thinking, planteamiento del problema y capturas del prototipo.</p>
-                    </div>
-                    <a href="Presentacion_Wolves.pdf" class="btn" target="_blank">Ver Presentacion_Wolves.pdf</a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="card-icon">📝</div>
-                        <h3>Whitepaper del Proyecto</h3>
-                        <p>Documentación técnica detallada que profundiza en la delimitación del tema, la justificación escolar, el funcionamiento del backend y los costos estimados de implementación.</p>
-                    </div>
-                    <a href="Whitepaper_Wolves.pdf.pdf" class="btn" target="_blank">Ver Whitepaper_Wolves.pdf.pdf</a>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Tienda Oficial / Material POP -->
-        <section id="tienda">
-            <h2>Tienda Oficial - Material POP</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; margin-top: -20px; font-size: 0.95rem;">Los estudiantes pueden canjear sus <strong>Eight-Coins</strong> acumuladas por estos fabulosos artículos de la manada:</p>
-            <div class="grid-store">
-                
-                <!-- Peluche -->
-                <div class="store-item">
-                    <div class="store-img-container">
-                        <img src="Peluche.jpeg" alt="Peluche Oficial Los Wolves" class="store-img">
-                    </div>
-                    <h3>Peluche Oficial</h3>
-                    <p class="store-price">$15.00</p>
-                    <span class="btn-store">Canjear Producto</span>
-                </div>
-
-                <!-- Taza -->
-                <div class="store-item">
-                    <div class="store-img-container">
-                        <img src="Taza.jpeg" alt="Taza Oficial Los Wolves" class="store-img">
-                    </div>
-                    <h3>Taza Wolves</h3>
-                    <p class="store-price">$8.00</p>
-                    <span class="btn-store">Canjear Producto</span>
-                </div>
-
-                <!-- Agenda -->
-                <div class="store-item">
-                    <div class="store-img-container">
-                        <img src="Agenda.jpeg" alt="Agenda Emocional Los Wolves" class="store-img">
-                    </div>
-                    <h3>Agenda Emocional</h3>
-                    <p class="store-price">$12.00</p>
-                    <span class="btn-store">Canjear Producto</span>
-                </div>
-
-                <!-- Llavero -->
-                <div class="store-item">
-                    <div class="store-img-container">
-                        <img src="Llavero.jpeg" alt="Llavero Oficial Los Wolves" class="store-img">
-                    </div>
-                    <h3>Llavero Wolves</h3>
-                    <p class="store-price">$5.00</p>
-                    <span class="btn-store">Canjear Producto</span>
-                </div>
-
-                <!-- Gorra -->
-                <div class="store-item">
-                    <div class="store-img-container">
-                        <img src="Gorra.jpeg" alt="Gorra Oficial Los Wolves" class="store-img">
-                    </div>
-                    <h3>Gorra Wolves</h3>
-                    <p class="store-price">$18.00</p>
-                    <span class="btn-store">Canjear Producto</span>
-                </div>
-
-                <!-- Hoodie -->
-                <div class="store-item">
-                    <div class="store-img-container">
-                        <img src="Hoodie.jpeg" alt="Hoodie Oficial Los Wolves" class="store-img">
-                    </div>
-                    <h3>Hoodie Wolves</h3>
-                    <p class="store-price">$35.00</p>
-                    <span class="btn-store">Canjear Producto</span>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Nuestro Equipo Real -->
-        <section id="equipo">
-            <h2>Nuestro Equipo (Séptimo A)</h2>
-            <div class="grid-team">
-                
-                <div class="team-member">
-                    <div class="avatar">MB</div>
-                    <div class="member-info">
-                        <h3>Maite Bravo</h3>
-                        <p>Líder de Proyecto</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="avatar">CI</div>
-                    <div class="member-info">
-                        <h3>Camilo Isava</h3>
-                        <p>Secretario / Documentación</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="avatar">LB</div>
-                    <div class="member-info">
-                        <h3>Leonardo Benítez</h3>
-                        <p>Diseñador de Interfaz</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="avatar">HY</div>
-                    <div class="member-info">
-                        <h3>Hazel Yanez</h3>
-                        <p>Expositor / Vocero</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="avatar">DP</div>
-                    <div class="member-info">
-                        <h3>David Palacios</h3>
-                        <p>Especialista en Marketing</p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="avatar">GM</div>
-                    <div class="member-info">
-                        <h3>Gabriel Marcillo</h3>
-                        <p>Investigador / Encuestas QR</p>
-                    </div>
-                </div>
-
-            </div>
+        <section class="section" id="page-moodcheck">
+            <h1 class="text-2xl font-bold mb-2 text-cyan-400">Registra tu Emoción Hoy</h1>
+            <p class="mb-6 text-sm" style="color:var(--muted)">¿Cómo te sientes hoy? Tus respuestas alertarán automáticamente al DECE en caso de riesgo.</p>
             
-            <div class="coordination">
-                <strong>Coordinación General del Proyecto:</strong> Lcda. Anita Parreño | Año Lectivo 2025-2026
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8" id="emotion-grid">
+                <div class="emotion-card-wrapper">
+                    <input type="radio" name="emotion" id="emotion-alegre" value="alegre" class="hidden">
+                    <label for="emotion-alegre" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
+                        <img src="img/avatar-alegre.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Alegre">
+                        <div class="font-bold text-sm text-cyan-400">Alegre</div>
+                    </label>
+                </div>
+                <div class="emotion-card-wrapper">
+                    <input type="radio" name="emotion" id="emotion-tranquilo" value="tranquilo" class="hidden">
+                    <label for="emotion-tranquilo" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
+                        <img src="img/avatar-tranquilo.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Tranquilo">
+                        <div class="font-bold text-sm text-blue-400">Tranquilo</div>
+                    </label>
+                </div>
+                <div class="emotion-card-wrapper">
+                    <input type="radio" name="emotion" id="emotion-triste" value="triste" class="hidden">
+                    <label for="emotion-triste" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
+                        <img src="img/avatar-triste.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Triste">
+                        <div class="font-bold text-sm text-purple-400">Triste</div>
+                    </label>
+                </div>
+                <div class="emotion-card-wrapper">
+                    <input type="radio" name="emotion" id="emotion-ansioso" value="ansioso" class="hidden">
+                    <label for="emotion-ansioso" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
+                        <img src="img/avatar-ansioso.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Ansioso">
+                        <div class="font-bold text-sm text-yellow-400">Ansioso</div>
+                    </label>
+                </div>
+                <div class="emotion-card-wrapper">
+                    <input type="radio" name="emotion" id="emotion-enojado" value="enojado" class="hidden">
+                    <label for="emotion-enojado" class="block glass p-5 text-center transition emotion-card border-2 border-transparent">
+                        <img src="img/avatar-enojado.png" class="w-20 h-20 mx-auto object-cover rounded-md mb-2" alt="Enojado">
+                        <div class="font-bold text-sm text-red-400">Enojado</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-8">
+                <button class="btn-cyan px-8" id="btn-register-mood">REGISTRAR EMOCIÓN</button>
+            </div>
+
+            <div id="dece-alert" class="hidden glass p-4 border border-red-500/50 bg-red-950/20 max-w-xl mx-auto">
+                <p class="font-bold text-red-400">🚨 Alerta Preventiva Generada en Firestore</p>
+                <p class="text-xs mt-1 text-slate-300">Se han detectado 3 registros consecutivos negativos. Notificación enviada al Panel DECE.</p>
+            </div>
+        </section>
+
+        <section class="section" id="page-wolfai">
+            <h1 class="text-2xl font-bold mb-1 text-cyan-400">Wolf AI</h1>
+            <p class="mb-6 text-sm" style="color:var(--muted)">Tu soporte emocional interactivo</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 flex flex-col justify-between glass p-5 min-h-[450px]">
+                    <div id="breathing-exercise" class="hidden glass bg-cyan-950/20 p-6 text-center mb-4">
+                        <h3 class="font-bold text-base mb-2 text-cyan-400">Respiración Guiada 4-4-4</h3>
+                        <div class="text-3xl font-bold text-white mb-1" id="breathing-stage">Inhala</div>
+                        <div class="text-5xl font-extrabold text-cyan-300 my-2" id="breathing-counter">4</div>
+                        <button class="btn-outline px-4 py-2 text-xs" onclick="stopBreathing()">Detener</button>
+                    </div>
+
+                    <div id="chat-area" class="flex flex-col gap-2 overflow-y-auto max-h-[300px] mb-4 pr-2">
+                        <div class="chat-bubble chat-bot">¡Hola! Conversa conmigo. Cada interacción te otorgará +15 Eight-Coins automáticas.</div>
+                    </div>
+                    
+                    <div>
+                        <div class="mb-3 flex flex-wrap gap-2">
+                            <button class="btn-outline text-xs px-3 py-1.5" onclick="wolfChat('estresado')">Estrés por exámenes</button>
+                            <button class="btn-outline text-xs px-3 py-1.5" onclick="wolfChat('adulto')">Hablar con un adulto</button>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="chat-input" placeholder="Escribe un mensaje aquí..." class="flex-1 glass-sm px-4 py-3 bg-transparent text-sm outline-none border border-slate-700 text-white">
+                            <button class="btn-cyan rounded-xl px-5" onclick="sendChatMessage()"><i data-lucide="send" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass p-5 h-fit">
+                    <h3 class="font-bold mb-3 text-sm text-cyan-400">Herramientas</h3>
+                    <button class="w-full text-left glass-sm p-3 text-xs hover:border-cyan-400 transition" onclick="startBreathing()">🧘‍♂️ Iniciar Respiración Guiada</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="page-retos">
+            <h1 class="text-2xl font-bold mb-4 text-cyan-400">Misiones y Retos de Convivencia</h1>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4" id="retos-grid"></div>
+        </section>
+
+        <section class="section" id="page-wallet">
+            <h1 class="text-2xl font-bold mb-4 text-cyan-400">Mi Wallet Eight-Coins</h1>
+            <div class="glass p-6 text-center glow max-w-sm mx-auto">
+                <p class="text-xs uppercase tracking-wide text-slate-400">Saldo Sincronizado Firebase</p>
+                <p class="text-4xl font-extrabold text-cyan-400 my-2" id="wallet-balance">1,250</p>
+                <span class="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">Blockchain Verified</span>
+            </div>
+        </section>
+
+        <section class="section" id="page-paneldece">
+            <h1 class="text-2xl font-bold mb-4 text-cyan-400">Panel Preventivo DECE</h1>
+            <div id="dece-table-container" class="glass overflow-hidden">
+                <table class="table-wolves">
+                    <thead class="bg-slate-900">
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Curso</th>
+                            <th>Nivel Alerta</th>
+                            <th>Fecha Alerta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dece-tbody">
+                        <tr><td colspan="4" class="text-center p-4 text-slate-500">Escuchando alertas activas en Firestore cloud...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="page-tienda">
+            <h1 class="text-2xl font-bold mb-4 text-cyan-400">Tienda de Canjeo</h1>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4" id="shop-grid"></div>
+        </section>
+
+        <section class="section" id="page-proyeccion">
+            <h1 class="text-2xl font-bold mb-4 text-cyan-400">Métricas & Reportes Generales</h1>
+            <div class="glass p-5 max-w-md">
+                <h3 class="font-bold text-sm mb-4 text-slate-200">Distribución de Estados Emocionales</h3>
+                <div class="flex items-center gap-6">
+                    <svg viewBox="0 0 36 36" class="w-32 h-32 transform -rotate-90">
+                        <circle cx="18" cy="18" r="15.915" fill="none" stroke="#00e676" stroke-width="4" stroke-dasharray="70 30"></circle>
+                        <circle cx="18" cy="18" r="15.915" fill="none" stroke="#ff4757" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-70"></circle>
+                    </svg>
+                    <div class="text-xs space-y-1">
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-emerald-400 rounded-full"></span> Positivas (70%)</div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-red-400 rounded-full"></span> De Riesgo (30%)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="page-equipo">
+            <h1 class="text-2xl font-bold mb-4 text-cyan-400">Miembros de la Manada</h1>
+            <div class="glass p-4 max-w-md text-center">
+                <img src="img/camilo-isava.jpg" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 border-2 border-cyan-400" alt="Camilo Isava">
+                <h3 class="font-bold text-white text-lg">Camilo Isava</h3>
+                <p class="text-xs text-cyan-400 font-semibold mb-2">Expositor Oficial del Equipo</p>
+                <p class="text-xs text-slate-400">Séptimo de Básica - Unidad Educativa Eight Academy.</p>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <p>&copy; 2026 Equipo Los Wolves - Unidad Educativa Eight Academy. Todos los derechos reservados.</p>
-    </footer>
+    <div class="toast" id="toast">Acción completada con éxito.</div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCqyoQY7BZj6S4tV4Ex7CqjH4uS8ahapPA",
+            authDomain: "wolves-academy-f9948.firebaseapp.com",
+            projectId: "wolves-academy-f9948",
+            storageBucket: "wolves-academy-f9948.firebasestorage.app",
+            messagingSenderId: "5255896819",
+            appId: "1:5255896819:web:e59975c5c9ab22061aa186",
+            measurementId: "G-VRN3C6L9LH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const ESTUDIANTE_ID = "matias_r_7a";
+
+        let coins = 1250;
+        let selectedEmotion = null;
+        let breathingInterval = null;
+
+        const retosData = [
+            {id: 1, name: 'Escucha Activa', coins: 100, cat: 'bienestar'},
+            {id: 2, name: 'Respira y Relájate', coins: 80, cat: 'bienestar'}
+        ];
+
+        const shopData = [
+            {name: 'Hoodie Oficial Wolves', price: 1500, emoji: '👕'},
+            {name: 'Gorra Wolves Campero', price: 800, emoji: '🧢'}
+        ];
+
+        async function initDashboard() {
+            const docRef = doc(db, "estudiantes", ESTUDIANTE_ID);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                coins = docSnap.data().coins || 1250;
+            } else {
+                await setDoc(docRef, { nombre: "Matías R.", curso: "7A", coins: 1250 });
+            }
+            renderCoinsUI();
+        }
+
+        function renderCoinsUI() {
+            document.getElementById('topbar-coins').textContent = coins.toLocaleString('es-ES');
+            if (document.getElementById('wallet-balance')) {
+                document.getElementById('wallet-balance').textContent = coins.toLocaleString('es-ES');
+            }
+        }
+
+        async function syncCoins(amount) {
+            coins += amount;
+            await setDoc(doc(db, "estudiantes", ESTUDIANTE_ID), { coins: coins }, { merge: true });
+            renderCoinsUI();
+        }
+
+        onSnapshot(query(collection(db, "estudiantes", ESTUDIANTE_ID, "emociones"), orderBy("date", "desc"), limit(3)), (snap) => {
+            let log = [];
+            snap.forEach(d => log.push(d.data().emotion));
+            const neg = ['triste', 'ansioso', 'enojado'];
+            if (log.length === 3 && log.every(e => neg.includes(e))) {
+                document.getElementById('dece-alert').classList.remove('hidden');
+                setDoc(doc(db, "alertas_dece", ESTUDIANTE_ID), {
+                    estudiante: "Matías R.", curso: "7A", nivel: "Alta", date: new Date().toISOString()
+                });
+            }
+        });
+
+        onSnapshot(collection(db, "alertas_dece"), (snap) => {
+            const tbody = document.getElementById('dece-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            if(snap.empty) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-slate-500">No hay alertas críticas registradas.</td></tr>`;
+                return;
+            }
+            snap.forEach(doc => {
+                const data = doc.data();
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${data.estudiante}</td>
+                        <td>${data.curso}</td>
+                        <td><span class="badge badge-red">${data.nivel}</span></td>
+                        <td>${new Date(data.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+                    </tr>
+                `;
+            });
+        });
+
+        window.navigate = function(pageId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const el = document.getElementById('page-' + pageId);
+            if (el) el.classList.add('active');
+
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            const link = document.querySelector(`.sidebar-link[data-page="${pageId}"]`);
+            if (link) link.classList.add('active');
+        };
+
+        window.showToast = function(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        };
+
+        window.wolfChat = function(key) {
+            const area = document.getElementById('chat-area');
+            const u = document.createElement('div'); u.className = 'chat-bubble chat-user';
+            u.textContent = `Reporto estado de: ${key}`; area.appendChild(u);
+            
+            setTimeout(async () => {
+                const b = document.createElement('div'); b.className = 'chat-bubble chat-bot';
+                b.textContent = key === 'estresado' ? 'El estrés escolar es manejable. Inicia el ejercicio de respiración guiada 4-4-4.' : 'No estás solo en la manada. Puedes acudir a conversar con la Lcda. Anita Parreño en el departamento del DECE.';
+                area.appendChild(b);
+                area.scrollTop = area.scrollHeight;
+                await syncCoins(15);
+            }, 600);
+        };
+
+        window.startBreathing = function() {
+            document.getElementById('breathing-exercise').classList.remove('hidden');
+            let cycle = 0; let timer = 4;
+            breathingInterval = setInterval(() => {
+                timer--;
+                if(timer <= 0) {
+                    cycle = (cycle + 1) % 3; timer = 4;
+                    document.getElementById('breathing-stage').textContent = ['Inhala', 'Mantén', 'Exhala'][cycle];
+                }
+                document.getElementById('breathing-counter').textContent = timer;
+            }, 1000);
+        };
+
+        window.stopBreathing = async function() {
+            clearInterval(breathingInterval);
+            document.getElementById('breathing-exercise').classList.add('hidden');
+            await syncCoins(20);
+            showToast('Ejercicio registrado en la nube: +20 EC');
+        };
+
+        document.getElementById('btn-register-mood').addEventListener('click', async () => {
+            if(!selectedEmotion) return showToast('Elige un estado primero.');
+            await addDoc(collection(db, "estudiantes", ESTUDIANTE_ID, "emociones"), {
+                emotion: selectedEmotion, date: new Date().toISOString()
+            });
+            await syncCoins(10);
+            showToast('Estado enviado a Firestore: +10 Eight-Coins');
+        });
+
+        document.querySelectorAll('.emotion-card-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                document.querySelectorAll('.emotion-card').forEach(c => c.classList.remove('selected'));
+                wrapper.querySelector('.emotion-card').classList.add('selected');
+                selectedEmotion = wrapper.querySelector('input').value;
+            });
+        });
+
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+        
+        // =========================================================================
+        // 🔥 ASIGNACIÓN DE CLICS AUTOMÁTICOS PARA EL MENÚ LATERAL (ARREGLADO)
+        // =========================================================================
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                window.navigate(link.dataset.page);
+            });
+        });
+
+        const rGrid = document.getElementById('retos-grid');
+        retosData.forEach(r => {
+            rGrid.innerHTML += `<div class="glass p-4"><h4 class="font-bold text-sm text-white">${r.name}</h4><p class="text-xs text-cyan-400 mt-1">+${r.coins} EC</p></div>`;
+        });
+
+        const sGrid = document.getElementById('shop-grid');
+        shopData.forEach(p => {
+            sGrid.innerHTML += `<div class="glass p-4 text-center"><div class="text-2xl">${p.emoji}</div><h4 class="font-bold text-xs mt-1 text-white">${p.name}</h4><p class="text-xs text-cyan-400 font-bold">${p.price} EC</p></div>`;
+        });
+
+        initDashboard();
+        lucide.createIcons();
+    </script>
 </body>
 </html>

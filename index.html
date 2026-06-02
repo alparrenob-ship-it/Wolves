@@ -33,6 +33,7 @@
         ::-webkit-scrollbar-track { background: var(--navy); }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 999px; }
 
+        /* Estilo de tarjetas de emociones */
         .emotion-card-custom {
             background: #030a1e;
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -40,14 +41,19 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .emotion-card-custom:hover { transform: translateY(-4px); background: #051233; }
+        .emotion-card-custom:hover {
+            transform: translateY(-4px);
+            background: #051233;
+        }
 
+        /* Anillos Neón al seleccionar emociones */
         .emotion-card-wrapper input[type="radio"]#emotion-alegre:checked + label { border-color: #00e676 !important; box-shadow: 0 0 20px rgba(0,230,118,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-tranquilo:checked + label { border-color: #00b8d4 !important; box-shadow: 0 0 20px rgba(0,184,212,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-triste:checked + label { border-color: #9333ea !important; box-shadow: 0 0 20px rgba(147,51,234,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-ansioso:checked + label { border-color: #eab308 !important; box-shadow: 0 0 20px rgba(234,179,8,0.25); }
         .emotion-card-wrapper input[type="radio"]#emotion-enojado:checked + label { border-color: #ef4444 !important; box-shadow: 0 0 20px rgba(239,68,68,0.25); }
 
+        /* Círculos selectores */
         .selector-dot {
             width: 18px; height: 18px; border: 2px solid #27354a; border-radius: 50%; margin: 0 auto; transition: all 0.2s;
         }
@@ -55,6 +61,7 @@
             background: #00d9ff; border-color: #00d9ff; box-shadow: 0 0 8px #00d9ff;
         }
 
+        /* Botones generales */
         .btn-action-cyan {
             background: #00b8d4; color: #020817; font-weight: 800; border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 184, 212, 0.4); transition: all 0.3s ease;
@@ -71,9 +78,11 @@
         .section { display: none; }
         .section.active { display: block; }
         
+        /* Seguimiento Semanal */
         .timeline-box { background: rgba(4, 11, 28, 0.6); border: 1px solid rgba(0, 217, 255, 0.05); border-radius: 16px; }
         .day-card { background: #020714; border: 1px solid rgba(255,255,255,0.02); border-radius: 12px; }
 
+        /* Burbujas del Chat de Wolf AI */
         .chat-bubble { padding: 12px 18px; border-radius: 16px; font-size: 0.9rem; line-height: 1.5; max-width: 75%; margin-bottom: 4px; animation: bubbleAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         .chat-bot { background-color: #09122a; border: 1px solid rgba(255, 255, 255, 0.03); align-self: flex-start; color: #f1f5f9; border-top-left-radius: 4px; }
         .chat-user { background-color: #00b8d4; color: #020817; font-weight: 500; align-self: flex-end; border-top-right-radius: 4px; box-shadow: 0 4px 15px rgba(0, 184, 212, 0.2); }
@@ -202,7 +211,7 @@
                     <div class="emotion-card-wrapper">
                         <input type="radio" name="emotion" id="emotion-alegre" value="alegre" class="hidden">
                         <label for="emotion-alegre" class="block p-5 text-center emotion-card-custom">
-                            <img src="TRANQUILO" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Alegre" onerror="this.src='GO FONDO AZU.png'">
+                            <img src="ALEGRE.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Alegre" onerror="this.src='GO FONDO AZU.png'">
                             <div class="font-bold text-sm text-cyan-400 mb-1">Alegre</div>
                             <p class="text-[10px] text-slate-500 mb-4">Me siento feliz y con energía.</p>
                             <div class="selector-dot"></div>
@@ -211,7 +220,7 @@
                     <div class="emotion-card-wrapper">
                         <input type="radio" name="emotion" id="emotion-tranquilo" value="tranquilo" class="hidden">
                         <label for="emotion-tranquilo" class="block p-5 text-center emotion-card-custom">
-                            <img src="TRANQUILO" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Tranquilo" onerror="this.src='GO FONDO AZU.png'">
+                            <img src="TRANQUILO.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Tranquilo" onerror="this.src='GO FONDO AZU.png'">
                             <div class="font-bold text-sm text-blue-400 mb-1">Tranquilo</div>
                             <p class="text-[10px] text-slate-500 mb-4">Me siento en paz y relajado.</p>
                             <div class="selector-dot"></div>
@@ -220,7 +229,7 @@
                     <div class="emotion-card-wrapper">
                         <input type="radio" name="emotion" id="emotion-triste" value="triste" class="hidden">
                         <label for="emotion-triste" class="block p-5 text-center emotion-card-custom">
-                            <img src="GESTIONALA TRISTEZA.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Triste" onerror="this.src='GO FONDO AZU.png'">
+                            <img src="GESTIÓN LA TRISTEZA.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Triste" onerror="this.src='GO FONDO AZU.png'">
                             <div class="font-bold text-sm text-purple-400 mb-1">Triste</div>
                             <p class="text-[10px] text-slate-500 mb-4">Me siento triste o desanimado.</p>
                             <div class="selector-dot"></div>
@@ -229,7 +238,7 @@
                     <div class="emotion-card-wrapper">
                         <input type="radio" name="emotion" id="emotion-ansioso" value="ansioso" class="hidden">
                         <label for="emotion-ansioso" class="block p-5 text-center emotion-card-custom">
-                            <img src="CONTROLA LA ANSIEDAG" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Ansioso" onerror="this.src='GO FONDO AZU.png'">
+                            <img src="ANSIOSO.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Ansioso" onerror="this.src='GO FONDO AZU.png'">
                             <div class="font-bold text-sm text-yellow-500 mb-1">Ansioso</div>
                             <p class="text-[10px] text-slate-500 mb-4">Me siento preocupado o con nervios.</p>
                             <div class="selector-dot"></div>
@@ -238,7 +247,7 @@
                     <div class="emotion-card-wrapper">
                         <input type="radio" name="emotion" id="emotion-enojado" value="enojado" class="hidden">
                         <label for="emotion-enojado" class="block p-5 text-center emotion-card-custom">
-                            <img src="MAAESA TU RA.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Enojado" onerror="this.src='GO FONDO AZU.png'">
+                            <img src="ENOJADO.png" class="w-24 h-24 mx-auto object-cover rounded-xl mb-3" alt="Enojado" onerror="this.src='GO FONDO AZU.png'">
                             <div class="font-bold text-sm text-red-500 mb-1">Enojado</div>
                             <p class="text-[10px] text-slate-500 mb-4">Me siento molesto o frustrado.</p>
                             <div class="selector-dot"></div>
@@ -263,6 +272,15 @@
                         <div class="day-card p-3 flex flex-col items-center" data-day="Sáb"><span class="text-[11px] text-slate-400 font-medium mb-1">Sáb</span><div class="slot-visual font-bold text-xs text-slate-600">-</div></div>
                         <div class="day-card p-3 flex flex-col items-center" data-day="Dom"><span class="text-[11px] text-slate-400 font-medium mb-1">Dom</span><div class="slot-visual font-bold text-xs text-slate-600">-</div></div>
                     </div>
+                    <div class="text-center text-[11px] text-slate-400 border-t border-white/5 pt-3">
+                        Registra tus emociones todos los días para fortalecer tu bienestar emocional.<br>
+                        <span class="text-cyan-400 font-bold">+10 Eight-Coins por registro diario ✓</span>
+                    </div>
+                </div>
+
+                <div id="dece-alert" class="hidden rounded-xl p-4 border border-red-500/20 bg-red-950/20 max-w-xl mx-auto mt-6 flex items-center gap-3 animate-pulse">
+                    <div class="text-lg">🚨</div>
+                    <p class="text-xs text-red-400 font-medium">Alerta preventiva generada para el DECE: se detectaron 3 emociones negativas consecutivas.</p>
                 </div>
             </section>
 
@@ -318,8 +336,7 @@
                         <h1 class="text-2xl font-black text-white">Consola de Control DECE</h1>
                         <p class="text-xs text-slate-400">Monitoreo de alertas tempranas e índice general de Eight-Coins</p>
                     </div>
-                    
-                    <button id="btn-export-csv" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-900 font-extrabold text-xs px-6 py-3 rounded-xl shadow-lg shadow-emerald-500/10 flex items-center gap-2 uppercase tracking-wider transition-all">
+                    <button id="btn-export-csv" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-900 font-extrabold text-xs px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 uppercase tracking-wider transition-all">
                         <i data-lucide="download" class="w-4 h-4"></i> Exportar Base Completa (CSV)
                     </button>
                 </div>
@@ -368,7 +385,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, onSnapshot, query, orderBy, limit, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -389,10 +406,15 @@
         let coins = 1250;
         let selectedEmotion = null;
         let isSignUpMode = false;
-        let cachedStudentsData = []; // Caché global para armar el CSV de inmediato
+        let cachedStudentsData = [];
 
+        // Mapeador corregido estrictamente a tus nombres en mayúsculas de GitHub
         const imgMapping = {
-            alegre: "TRANQUILO", tranquilo: "TRANQUILO", triste: "GESTIONALA TRISTEZA.png", ansioso: "CONTROLA LA ANSIEDAG", enojado: "MAAESA TU RA.png"
+            alegre: "ALEGRE.png",
+            tranquilo: "TRANQUILO.png",
+            triste: "GESTIÓN LA TRISTEZA.png",
+            ansioso: "ANSIOSO.png",
+            enojado: "ENOJADO.png"
         };
 
         const botResponses = {
@@ -404,7 +426,7 @@
         };
 
         // ==========================================
-        // 🔄 MANEJADOR DE AUTENTICACIÓN Y ROLES
+        // 🔄 DETECTOR DE SESIÓN Y ROLES
         // ==========================================
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -412,7 +434,6 @@
                 document.getElementById('auth-overlay').classList.add('hidden');
                 document.getElementById('app-wrapper').classList.remove('hidden');
                 
-                // CONTROL DE ROLES: Verificar si es el usuario master administrativo
                 if (user.email === "anita@eightacademy.edu.ec") {
                     document.getElementById('master-badge').classList.remove('hidden');
                     document.getElementById('student-badge').classList.add('hidden');
@@ -478,7 +499,7 @@
         document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
 
         // ==========================================
-        // 🔮 SISTEMA MOOD CHECK + HISTORIAL
+        // 🔮 SISTEMA MOOD CHECK + HISTORIAL SEMANAL
         // ==========================================
         document.getElementById('btn-register-mood').addEventListener('click', async () => {
             if(!selectedEmotion || !currentUserUID) return showToast('Elige un estado primero.');
@@ -600,20 +621,18 @@
         // ==========================================
         // 📥 LÓGICA DE CONTROL GLOBAL Y EXPORTACIÓN CSV
         // ==========================================
-        
-        // Escucha en vivo de la base de datos de todos los estudiantes inscritos
         function cargarTablaGlobalMaster() {
             onSnapshot(collection(db, "estudiantes"), (snap) => {
                 const tbody = document.getElementById("master-students-tbody");
                 if (!tbody) return;
 
                 tbody.innerHTML = "";
-                cachedStudentsData = []; // Resetear caché
+                cachedStudentsData = [];
                 let totalStudents = 0;
                 let circulationCoins = 0;
 
                 if (snap.empty) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-slate-500">No hay estudiantes registrados en Firebase.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-slate-500">No hay estudiantes registrados.</td></tr>`;
                     return;
                 }
 
@@ -623,15 +642,10 @@
                     totalStudents++;
                     circulationCoins += parseInt(data.coins || 0);
 
-                    // Guardar en la caché para la descarga del archivo CSV
                     cachedStudentsData.push({
-                        uid: id,
-                        nombre: data.nombre || "Sin nombre",
-                        curso: data.curso || "7A",
-                        coins: data.coins || 0
+                        uid: id, nombre: data.nombre || "Sin nombre", curso: data.curso || "7A", coins: data.coins || 0
                     });
 
-                    // Inyectar fila visual en la tabla del panel institucional
                     tbody.innerHTML += `
                         <tr>
                             <td class="text-xs text-slate-500 font-mono">${id}</td>
@@ -642,38 +656,30 @@
                     `;
                 });
 
-                // Actualizar los indicadores métricos del panel
                 document.getElementById("dece-stat-students").textContent = totalStudents;
                 document.getElementById("dece-stat-coins").textContent = `${circulationCoins.toLocaleString('es-ES')} EC`;
             });
         }
 
-        // 🚀 ALGORITMO EXPORTADOR DE CSV NATIVO EN UN CLIC
         document.getElementById("btn-export-csv").addEventListener("click", () => {
             if (cachedStudentsData.length === 0) {
                 showToast("No hay datos disponibles para exportar aún.");
                 return;
             }
-
-            // Encabezados de las columnas del reporte estructurado
             let csvContent = "data:text/csv;charset=utf-8,";
             csvContent += "UID Estudiante,Nombre Completo,Curso Asignado,Saldo Eight-Coins\n";
 
-            // Recorrer los registros de los alumnos e inyectar filas de texto separadas por comas
             cachedStudentsData.forEach((row) => {
                 csvContent += `"${row.uid}","${row.nombre}","${row.curso}",${row.coins}\n`;
             });
 
-            // Codificar el contenido de texto plano e inyectar descarga simulada en el navegador
             const encodedUri = encodeURI(csvContent);
             const downloadLink = document.createElement("a");
             downloadLink.setAttribute("href", encodedUri);
             downloadLink.setAttribute("download", `reporte_manada_wolves_${new Date().toISOString().split('T')[0]}.csv`);
             document.body.appendChild(downloadLink);
-            
-            downloadLink.click(); // Forzar clic invisible para iniciar la descarga del archivo
+            downloadLink.click();
             document.body.removeChild(downloadLink);
-
             showToast("📥 Archivo CSV descargado con éxito.");
         });
 

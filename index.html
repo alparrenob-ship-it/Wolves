@@ -907,4 +907,214 @@
             localStorage.setItem(`retos_${currentUserUID}`, JSON.stringify(completed));
             syncCoins(amt);
             document.getElementById("challenge-modal").classList.add("hidden");
-            renderFeatured
+            renderFeaturedChallengesGrid("all");
+            renderMoreChallengesList();
+            showToast("Desafío registrado con éxito.");
+        };
+
+        document.getElementById("btn-close-modal").addEventListener("click", () => {
+            clearInterval(activeBreathingInterval);
+            document.getElementById("challenge-modal").classList.add("hidden");
+        });
+
+        // ==========================================
+        // SISTEMA MOOD CHECK + HISTORIAL SEMANAL
+        // ==========================================
+        document.getElementById('btn-register-mood').addEventListener('click', async () => {
+            if(!selectedEmotion || !currentUserUID) return showToast('Elige un estado primero.');
+            await addDoc(collection(db, "estudiantes", currentUserUID, "emociones"), {
+                emotion: selectedEmotion, date: new Date().toISOString()
+            });
+
+            const daysMap = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            const todayDay = daysMap[new Date().getDay()];
+            let tracker = JSON.parse(localStorage.getItem(`tracker_${currentUserUID}`)) || {};
+            tracker[todayDay] = selectedEmotion;
+            localStorage.setItem(`tracker_${currentUserUID}`, JSON.stringify(tracker));
+
+            await syncCoins(10);
+            renderWeeklyDashboard();
+            showToast('Emoción registrada con éxito. +10 Eight-Coins.');
+        });
+
+        function renderWeeklyDashboard() {
+            if(!currentUserUID) return;
+            const tracker = JSON.parse(localStorage.getItem(`tracker_${currentUserUID}`)) || {};
+            Object.keys(tracker).forEach(day => {
+                const dayBox = document.querySelector(`.day-card[data-day="${day}"]`);
+                if(dayBox) {
+                    const visualSlot = dayBox.querySelector(".slot-visual");
+                    visualSlot.innerHTML = `<img src="${imgMapping[tracker[day]]}" class="w-8 h-8 object-cover rounded-md border border-white/5">`;
+                }
+            });
+        }
+
+        function activarCanalesEscucha() {
+            onSnapshot(query(collection(db, "estudiantes", currentUserUID, "emociones"), orderBy("date", "desc"), limit(3)), (snap) => {
+                let log = [];
+                snap.forEach(d => log.push(d.data().emotion));
+                const neg = ['triste', 'ansioso', 'enojado'];
+                if (log.length === 3 && log.every(e => neg.includes(e))) {
+                    document.getElementById('dece-alert').classList.remove('hidden');
+                    setDoc(doc(db, "alertas_dece", currentUserUID), {
+                        estudiante: document.getElementById('user-display-name').textContent.replace('¡Hola, ', '').replace('!', ''),
+                        curso: "7A", nivel: "Alta", date: new Date().toISOString()
+                    });
+                }
+            });
+        }
+
+        // ==========================================
+        // CHAT INTERACTIVO WOLF AI
+        // ==========================================
+        const chatBox = document.getElementById("chat-messages-container");
+        const chatInput = document.getElementById("chat-user-input");
+        const btnSend = document.getElementById("btn-send-message");
+
+        btnSend.addEventListener("click", processChatMessage);
+        chatInput.addEventListener("keypress", (e) => { if (e.key === "Enter") processChatMessage(); });
+
+        function processChatMessage() {
+            const val = chatInput.value.trim();
+            if(!val) return;
+            injectBubble(val, "user");
+            chatInput.value = "";
+            document.getElementById("wolf-welcome-block").classList.add("hidden");
+
+            setTimeout(async () => {
+                injectBubble("Entiendo lo que dices. He procesado tu mensaje para evaluar tu racha de estabilidad. Sigamos adelante. 🐾", "bot");
+                await syncCoins(15);
+                showToast("Interacción registrada. +15 Eight-Coins.");
+            }, 750);
+        }
+
+        document.querySelectorAll(".quick-reply-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const text = btn.getAttribute("data-text");
+                injectBubble(text, "user");
+                document.getElementById("wolf-welcome-block").classList.add("hidden");
+
+                let key = "default";
+                if (text.includes("estresado")) key = "estresado";
+                else if (text.includes("triste")) key = "triste";
+                else if (text.includes("ansiedad")) key = "ansiedad";
+                else if (text.includes("calmarme")) key = "calmarme";
+
+                setTimeout(async () => {
+                    injectBubble(botResponses[key], "bot");
+                    await syncCoins(15);
+                    showToast("Interacción registrada. +15 Eight-Coins.");
+                }, 700);
+            });
+        });
+
+        document.body.addEventListener("click", (e) => {
+            const node = e.target.closest("[data-action]");
+            if(!node) return;
+            const action = node.getAttribute("data-action");
+            document.getElementById("wolf-welcome-block").classList.add("hidden");
+
+            if(action === "respiracion") {
+                injectBubble("Iniciando ejercicio de respiración guiada 4-4-4...", "user");
+                setTimeout(async () => {
+                    const customHTML = `
+                        <div class="space-y-1 w-full max-w-xs p-2 rounded-xl breathing-box-step border-l-2 border-cyan-400 bg-cyan-500/5 mt-2">
+                            <div class="flex justify-between text-[11px] font-bold text-white"><span>🫁 1. Inhala</span> <span>4s</span></div>
+                            <div class="flex justify-between text-[11px] text-slate-400"><span>⏳ 2. Mantén</span> <span>4s</span></div>
+                            <div class="flex justify-between text-[11px] text-slate-400"><span>🌬️ 3. Exhala</span> <span>4s</span></div>
+                        </div>`;
+                    injectBubble("Vamos a hacer respiración 4-4-4 🫁. Repite 3 veces para calmar el cuerpo.", "bot", customHTML);
+                    await syncCoins(15);
+                }, 600);
+            }
+        });
+
+        function injectBubble(msg, sender, html = "") {
+            const wrapper = document.createElement("div");
+            wrapper.className = `chat-bubble ${sender === "user" ? "chat-user" : "chat-bot"}`;
+            if(html) { wrapper.innerHTML = `<p>${msg}</p>${html}`; } else { wrapper.textContent = msg; }
+            chatBox.appendChild(wrapper);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // ==========================================
+        // 📥 CONTROL GLOBAL INSTITUCIONAL DECE 
+        // ==========================================
+        function cargarTablaGlobalMaster() {
+            onSnapshot(collection(db, "estudiantes"), (snap) => {
+                const tbody = document.getElementById("master-students-tbody");
+                if (!tbody) return;
+                tbody.innerHTML = ""; cachedStudentsData = [];
+                let totalStudents = 0; let circulationCoins = 0;
+
+                snap.forEach((doc) => {
+                    const id = doc.id; const data = doc.data();
+                    totalStudents++; circulationCoins += parseInt(data.coins || 0);
+                    cachedStudentsData.push({ uid: id, nombre: data.nombre || "Sin nombre", curso: data.curso || "7A", coins: data.coins || 0 });
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td class="text-xs text-slate-500 font-mono">${id}</td>
+                            <td class="font-bold text-slate-200">${data.nombre || 'Estudiante'}</td>
+                            <td class="text-slate-400">${data.curso || '7A'}</td>
+                            <td class="font-extrabold text-cyan-400">${(data.coins || 0).toLocaleString('es-ES')} EC</td>
+                        </tr>`;
+                });
+                document.getElementById("dece-stat-students").textContent = totalStudents;
+                document.getElementById("dece-stat-coins").textContent = `${circulationCoins.toLocaleString('es-ES')} EC`;
+            });
+        }
+
+        document.getElementById("btn-export-csv").addEventListener("click", () => {
+            if (cachedStudentsData.length === 0) return;
+            let csvContent = "data:text/csv;charset=utf-8,UID Estudiante,Nombre Completo,Curso Asignado,Saldo Eight-Coins\n";
+            cachedStudentsData.forEach((row) => { csvContent += `"${row.uid}","${row.nombre}","${row.curso}",${row.coins}\n`; });
+            const encodedUri = encodeURI(csvContent);
+            const downloadLink = document.createElement("a");
+            downloadLink.setAttribute("href", encodedUri); downloadLink.setAttribute("download", `reporte_manada_wolves.csv`);
+            document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink);
+            showToast("📥 Archivo CSV descargado con éxito.");
+        });
+
+        function saveChatHistory() { if(!currentUserUID) return; localStorage.setItem(`chathistory_${currentUserUID}`, chatBox.innerHTML); }
+        function loadChatHistory() { if(!currentUserUID) return; const h = localStorage.getItem(`chathistory_${currentUserUID}`); if(h) { chatBox.innerHTML = h; document.getElementById("wolf-welcome-block").classList.add("hidden"); chatBox.scrollTop = chatBox.scrollHeight; } }
+        
+        function renderCoinsUI() { 
+            document.getElementById('topbar-coins').textContent = coins.toLocaleString('es-ES'); 
+            if(document.getElementById('wallet-main-coins')) {
+                document.getElementById('wallet-main-coins').textContent = coins.toLocaleString('es-ES');
+            }
+        }
+        
+        async function syncCoins(amount) {
+            coins += amount;
+            if(currentUserUID) { await setDoc(doc(db, "estudiantes", currentUserUID), { coins: coins }, { merge: true }); }
+            renderCoinsUI();
+        }
+
+        function incrementImpactMetrics(amt) { sessionActivitiesCount++; sessionCoinsEarned += amt; document.getElementById("metric-activities").textContent = sessionActivitiesCount; document.getElementById("metric-coins").textContent = `+${sessionCoinsEarned}`; }
+
+        window.navigate = function(pageId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const el = document.getElementById('page-' + pageId); if (el) el.classList.add('active');
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            const link = document.querySelector(`.sidebar-link[data-page="${pageId}"]`); if (link) link.classList.add('active');
+        };
+
+        window.showToast = function(msg) {
+            const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        };
+
+        document.querySelectorAll('.sidebar-link').forEach(link => { link.addEventListener('click', () => window.navigate(link.dataset.page)); });
+        document.querySelectorAll('.emotion-card-custom').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.emotion-card-custom').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected'); selectedEmotion = card.parentNode.querySelector('input').value; card.parentNode.querySelector('input').checked = true;
+            });
+        });
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>

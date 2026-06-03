@@ -10,31 +10,29 @@
     
     <style>
         :root {
-            --navy: #020817;
-            --navy-light: #060e22;
+            --bg: #020617;
+            --card: rgba(8, 24, 55, 0.78);
+            --card-2: rgba(3, 15, 35, 0.85);
             --cyan: #00d9ff;
-            --cyan-dim: rgba(0, 217, 255, 0.08);
-            --glass: rgba(6, 17, 41, 0.85);
-            --glass-border: rgba(0, 217, 255, 0.15);
-            --text: #ffffff;
-            --muted: #64748b;
-            --card-bg: #040c24;
+            --blue: #0ea5e9;
             --green: #22c55e;
             --yellow: #facc15;
             --red: #ef4444;
             --purple: #8b5cf6;
+            --text: #ffffff;
+            --muted: #9fb4d8;
         }
         * { box-sizing: border-box; }
         body { 
             font-family: 'DM Sans', sans-serif; 
             margin: 0; 
-            background: var(--navy); 
+            background: var(--bg); 
             color: var(--text);
             overflow-x: hidden;
         }
         
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--navy); }
+        ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 999px; }
 
         /* Estilos de Cristal UI */
@@ -45,14 +43,14 @@
             border-radius: 16px;
         }
 
-        .emotion-card-custom, .challenge-card-premium {
+        .emotion-card-custom {
             background: #030a1e;
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .emotion-card-custom:hover, .challenge-card-premium:hover { transform: translateY(-4px); background: #051233; }
+        .emotion-card-custom:hover { transform: translateY(-4px); background: #051233; }
 
         /* Enfoques y Resplandores Neón de Reacciones */
         .emotion-card-wrapper input[type="radio"]#emotion-alegre:checked + label { border-color: var(--green) !important; box-shadow: 0 0 20px rgba(34,197,94,0.25); }
@@ -81,7 +79,7 @@
         .sidebar-link.active { background: linear-gradient(90deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 217, 255, 0) 100%); color: var(--cyan); border-left-color: var(--cyan); }
         
         .topbar { position: fixed; top: 0; left: 250px; right: 0; height: 70px; background: #020817; border-bottom: 1px solid rgba(255, 255, 255, 0.03); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 40; }
-        .main-content { margin-left: 250px; margin-top: 70px; padding: 40px; min-height: calc(100vh - 70px); }
+        .main-content { margin-left: 250px; margin-top: 70px; padding: 30px; min-height: calc(100vh - 70px); }
         .section { display: none; }
         .section.active { display: block; }
         
@@ -93,6 +91,7 @@
             height: 380px;
             overflow-y: auto;
             display: flex;
+            flex-col: ;
             flex-direction: column;
             gap: 12px;
             padding-right: 4px;
@@ -112,6 +111,7 @@
         
         .chat-inline-btn { background-color: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; transition: all 0.2s ease; margin-top: 4px; }
         .chat-inline-btn:hover { background-color: rgba(0, 217, 255, 0.1); border-color: var(--cyan); color: var(--cyan); }
+        
         .quick-reply-btn { background-color: #060f26; border: 1px solid rgba(255, 255, 255, 0.03); padding: 8px 16px; border-radius: 10px; font-size: 0.8rem; font-weight: 500; color: #94a3b8; transition: all 0.2s ease; }
         .quick-reply-btn:hover { background-color: #0c1c45; color: #ffffff; border-color: rgba(0, 217, 255, 0.15); }
         
@@ -120,12 +120,6 @@
         
         .toast { position: fixed; bottom: 30px; right: 30px; background: #00d9ff; color: #020817; padding: 16px 28px; border-radius: 12px; font-weight: 700; z-index: 9999; box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3); transform: translateY(150px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .toast.show { transform: translateY(0); }
-
-        /* Estructuras específicas para la animación de respiración en retos */
-        .breath-ring-modal { width: 100px; height: 100px; border-radius: 50%; border: 3px dashed rgba(0, 217, 255, 0.3); display: flex; align-items: center; justify-content: center; transition: all 1s ease-in-out; }
-        .breath-ring-modal.expand { transform: scale(1.2); border-color: var(--cyan); background: rgba(0, 217, 255, 0.05); }
-        .breath-ring-modal.hold { border-color: var(--yellow); background: rgba(250, 204, 21, 0.05); }
-        .breath-ring-modal.contract { transform: scale(0.9); border-color: var(--red); }
         
         @keyframes bubbleAppear {
             to { opacity: 1; transform: translateY(0); }
@@ -180,7 +174,7 @@
                 <div class="sidebar-link active" data-page="inicio"><i data-lucide="home" class="w-4 h-4"></i> Inicio</div>
                 <div class="sidebar-link" data-page="moodcheck"><i data-lucide="heart" class="w-4 h-4"></i> Mood Check</div>
                 <div class="sidebar-link" data-page="wolfai"><i data-lucide="bot" class="w-4 h-4"></i> Wolf AI</div>
-                <div class="sidebar-link" data-page="retos"><i data-lucide="trophy" class="w-4 h-4"></i> Retos</div>
+                <div class="sidebar-link" data-page="retos"><i data-lucide="target" class="w-4 h-4"></i> Retos</div>
                 <div class="sidebar-link" data-page="wallet"><i data-lucide="wallet" class="w-4 h-4"></i> Wallet</div>
                 <div class="sidebar-link" data-page="paneldece"><i data-lucide="shield" class="w-4 h-4"></i> Panel DECE</div>
                 <div class="sidebar-link" data-page="tienda"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Tienda</div>
@@ -301,10 +295,6 @@
                         <div class="day-card p-3 flex flex-col items-center" data-day="Sáb"><span class="text-[11px] text-slate-400 font-medium mb-1">Sáb</span><div class="slot-visual font-bold text-xs text-slate-600">-</div></div>
                         <div class="day-card p-3 flex flex-col items-center" data-day="Dom"><span class="text-[11px] text-slate-400 font-medium mb-1">Dom</span><div class="slot-visual font-bold text-xs text-slate-600">-</div></div>
                     </div>
-                    <div class="text-center text-[11px] text-slate-400 border-t border-white/5 pt-3">
-                        Registra tus emociones todos los días para fortalecer tu bienestar emocional.<br>
-                        <span class="text-cyan-400 font-bold">+10 Eight-Coins por registro diario ✓</span>
-                    </div>
                 </div>
 
                 <div id="dece-alert" class="hidden rounded-xl p-4 border border-red-500/20 bg-red-950/20 max-w-xl mx-auto mt-6 flex items-center gap-3 animate-pulse">
@@ -414,77 +404,6 @@
                 </div>
             </section>
 
-            <section class="section" id="page-retos">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400">
-                        <i data-lucide="trophy" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-black text-white tracking-tight">Retos</h1>
-                        <p class="text-xs text-slate-400">Supera desafíos, fortalece tu bienestar emocional y gana recompensas. 🐾</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                    <div class="lg:col-span-2 space-y-6">
-                        <div class="flex flex-wrap gap-2 border-b border-white/5 pb-3 font-medium text-xs">
-                            <button class="tab-filter-btn px-4 py-2 rounded-lg bg-cyan-500 text-slate-900 font-extrabold tracking-wide uppercase transition-all" data-category="all">Todos los retos</button>
-                            <button class="tab-filter-btn px-4 py-2 rounded-lg bg-[#040a17] text-slate-400 hover:text-white transition-all uppercase" data-category="bienestar">Bienestar emocional</button>
-                            <button class="tab-filter-btn px-4 py-2 rounded-lg bg-[#040a17] text-slate-400 hover:text-white transition-all uppercase" data-category="saludable">Hábitos saludables</button>
-                            <button class="tab-filter-btn px-4 py-2 rounded-lg bg-[#040a17] text-slate-400 hover:text-white transition-all uppercase" data-category="academico">Académicos</button>
-                            <button class="tab-filter-btn px-4 py-2 rounded-lg bg-[#040a17] text-slate-400 hover:text-white transition-all uppercase" data-category="manada">Manada</button>
-                            <button class="tab-filter-btn px-4 py-2 rounded-lg bg-[#040a17] text-slate-400 hover:text-white transition-all uppercase" data-category="especial">Especiales</button>
-                        </div>
-
-                        <h2 class="text-sm font-bold uppercase tracking-widest text-cyan-400 mb-2">Retos destacados</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="featured-challenges-container">
-                            </div>
-
-                        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-400 mt-8 mb-2">Más retos para ti</h2>
-                        <div class="space-y-3" id="more-challenges-container">
-                            </div>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="rounded-2xl border border-white/5 bg-[#040a17]/40 p-5 backdrop-blur-md">
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                                <i data-lucide="trending-up" class="w-4 h-4 text-cyan-400"></i> Tu progreso general
-                            </h3>
-                            <div class="flex items-center gap-6 mb-4">
-                                <div class="relative w-20 h-20 flex items-center justify-center rounded-full bg-[#020817] border-4 border-cyan-500/20">
-                                    <span id="general-progress-pct" class="text-lg font-black text-cyan-400">68%</span>
-                                </div>
-                                <div class="space-y-1 text-xs">
-                                    <p class="text-slate-400">Retos completados: <span id="stat-completed-count" class="font-extrabold text-white">24</span></p>
-                                    <p class="text-slate-400">Eight-Coins ganadas: <span id="stat-coins-earned" class="font-extrabold text-yellow-500">2.480</span></p>
-                                    <p class="text-slate-400">Racha actual: <span id="stat-streak-days" class="font-extrabold text-orange-400">7 días</span></p>
-                                </div>
-                            </div>
-                            <p class="text-[11px] text-emerald-400 font-semibold text-center bg-emerald-500/5 py-1.5 rounded-lg border border-emerald-500/10">¡Vas por un gran camino, sigue así! 🐾</p>
-                        </div>
-
-                        <div class="rounded-2xl border border-white/5 bg-[#040a17]/40 p-5 backdrop-blur-md">
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                                <i data-lucide="award" class="w-4 h-4 text-yellow-500"></i> Top de la manada
-                            </h3>
-                            <div class="space-y-2.5" id="leaderboard-container">
-                                </div>
-                        </div>
-
-                        <div class="rounded-2xl p-5 border border-purple-500/10 bg-purple-950/5 relative overflow-hidden">
-                            <h4 class="text-xs font-extrabold uppercase text-purple-400 tracking-wider mb-1">Reto especial activo</h4>
-                            <p class="text-sm font-bold text-white mb-2">Semana del Bienestar</p>
-                            <p class="text-xs text-slate-400 mb-4 leading-relaxed">Completa 10 retos esta semana y gana una recompensa especial de la manada.</p>
-                            <div class="space-y-1">
-                                <div class="flex justify-between text-[10px] font-bold text-purple-300"><span>Progreso de Misión</span> <span>6 / 10 retos</span></div>
-                                <div class="w-full bg-[#020817] rounded-full h-1.5 overflow-hidden"><div class="bg-purple-500 h-full" style="width: 60%"></div></div>
-                            </div>
-                            <span class="block text-[10px] font-extrabold text-purple-400 uppercase tracking-wider mt-3">Recompensa: +500 Eight-Coins</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section class="section" id="page-paneldece">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
                     <div>
@@ -528,18 +447,12 @@
                 </div>
             </section>
 
+            <section class="section" id="page-retos"><h1 class="text-xl font-bold text-cyan-400">Misiones de la Manada</h1></section>
             <section class="section" id="page-wallet"><h1 class="text-xl font-bold text-cyan-400">Mi Wallet</h1></section>
             <section class="section" id="page-tienda"><h1 class="text-xl font-bold text-cyan-400">Tienda</h1></section>
             <section class="section" id="page-proyeccion"><h1 class="text-xl font-bold text-cyan-400">Métricas institucionales</h1></section>
             <section class="section" id="page-equipo"><h1 class="text-xl font-bold text-cyan-400">Miembros de la Manada</h1></section>
         </main>
-
-        <div id="challenge-modal" class="hidden fixed inset-0 z-[10000] flex items-center justify-center bg-[#020817]/90 px-4 backdrop-blur-md">
-            <div class="w-full max-w-xl border border-cyan-500/10 rounded-2xl bg-[#040a17] shadow-2xl p-6 relative max-h-[85vh] overflow-y-auto" style="background: linear-gradient(180deg, #040a17 0%, #020817 100%);">
-                <button id="btn-close-modal" class="absolute top-4 right-4 p-2 rounded-xl bg-white/5 text-slate-400 hover:text-white transition-all"><i data-lucide="x" class="w-4 h-4"></i></button>
-                <div id="modal-dynamic-content" class="space-y-5"></div>
-            </div>
-        </div>
 
         <footer class="ml-[250px] p-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 bg-[#020817]">
             <div class="flex items-center gap-2">
@@ -578,34 +491,10 @@
         let cachedStudentsData = [];
         let sessionActivitiesCount = 0;
         let sessionCoinsEarned = 0;
-        let activeBreathingInterval = null;
 
         const imgMapping = {
             alegre: "ALEGRE.png", tranquilo: "TRANQUILO.png", triste: "GESTIÓN LA TRISTEZA.png", ansioso: "ANSIOSO.png", enojado: "ENOJADO.png"
         };
-
-        // Repositorio Estructurado de Retos Extraído del PDF
-        const featuredChallenges = [
-            { id: "escucha_activa", title: "Escucha Activa", category: "manada", coins: 100, time: "5 min", diff: "Fácil", desc: "Practica la empatía prestando atención plena a los demás.", img: "ALEGRE.png" },
-            { id: "respira_relajate", title: "Respira y Relájate", category: "bienestar", coins: 80, time: "3 min", diff: "Fácil", desc: "Dedica 5 minutos al día a ejercicios de respiración.", img: "TRANQUILO.png" },
-            { id: "gestiona_tristeza", title: "Gestiona la Tristeza", category: "bienestar", coins: 120, time: "8 min", diff: "Media", desc: "Escribe lo que sientes y encuentra una salida saludable.", img: "GESTIÓN LA TRISTEZA.png" },
-            { id: "controla_ansiedad", title: "Controla la Ansiedad", category: "bienestar", coins: 120, time: "6 min", diff: "Media", desc: "Identifica tus pensamientos y aprende a calmarlos.", img: "ANSIOSO.png" },
-            { id: "maneja_ira", title: "Maneja tu Ira", category: "bienestar", coins: 150, time: "10 min", diff: "Difícil", desc: "Aprende a expresar tu enojo sin hacer daño.", img: "ENOJADO.png" }
-        ];
-
-        const listChallenges = [
-            { id: "diario_gratitud", title: "Diario de Gratitud", category: "saludable", coins: 60, desc: "Escribe 3 cosas por las que estás agradecido hoy.", target: "0/3 días" },
-            { id: "rutina_sueno", title: "Rutina de Sueño", category: "saludable", coins: 100, desc: "Duerme al menos 7 horas durante 3 días seguidos.", target: "1/3 días" },
-            { id: "estudia_foco", title: "Estudia con Foco", category: "academico", coins: 80, desc: "Estudia 45 minutos sin distracciones.", target: "0/5 sesiones" },
-            { id: "ayuda_manada", title: "Ayuda a tu Manada", category: "manada", coins: 70, desc: "Anima o apoya a un compañero de la manada.", target: "0/3 apoyos" },
-            { id: "reto_semanal", title: "Reto Semanal: Equilibrio", category: "especial", coins: 250, desc: "Completa 5 retos esta semana.", target: "2/5 retos" }
-        ];
-
-        const topManadaData = [
-            { rank: 1, name: "Matías R.", coins: "4.680", medal: "🥇" },
-            { rank: 2, name: "Valentina S.", coins: "4.120", medal: "🥈" },
-            { rank: 3, name: "Samuel T.", coins: "3.950", medal: "🥉" }
-        ];
 
         const botResponses = {
             estresado: "Entiendo, los exámenes o las responsabilidades pueden generar mucha presión. Es normal sentirse así. Vamos a manejarlo juntos 🐾 ¿Quieres probar una respiración guiada?",
@@ -657,11 +546,6 @@
                 activarCanalesEscucha();
                 cargarTablaGlobalMaster();
                 loadChatHistory();
-                
-                // Disparadores dinámicos de la vista de Retos (PDF)
-                renderFeaturedChallengesGrid("all");
-                renderMoreChallengesList();
-                renderLeaderboardUI();
             } else {
                 currentUserUID = null;
                 document.getElementById('auth-overlay').classList.remove('hidden');
@@ -669,7 +553,17 @@
             }
         });
 
-        // Configuración de accesos
+        // Alternador de accesos
+        document.getElementById('btn-auth-toggle').addEventListener('click', () => {
+            isSignUpMode = !isSignUpMode;
+            document.getElementById('field-name').classList.toggle('hidden', !isSignUpMode);
+            document.getElementById('auth-title').textContent = isSignUpMode ? "Registrar Nuevo Miembro" : "Iniciar Sesión";
+            document.getElementById('auth-subtitle').textContent = isSignUpMode ? "Únete a la manada de Eight Academy" : "Ingresa a la plataforma de bienestar de la manada";
+            document.getElementById('btn-auth-submit').textContent = isSignUpMode ? "Crear Mi Cuenta" : "Acceder a la Manada";
+            document.getElementById('auth-toggle-text').textContent = isSignUpMode ? "¿Ya tienes una cuenta?" : "¿Eres un nuevo miembro?";
+            document.getElementById('btn-auth-toggle').textContent = isSignUpMode ? "Inicia sesión aquí" : "Registrarme aquí";
+        });
+
         document.getElementById('btn-auth-submit').addEventListener('click', async () => {
             const email = document.getElementById('auth-email').value.trim();
             const password = document.getElementById('auth-password').value.trim();
@@ -684,212 +578,15 @@
                     await signInWithEmailAndPassword(auth, email, password);
                     showToast("¡Sesión iniciada con éxito!");
                 }
-            } catch (error) { showToast(`Error: ${error.message}`); }
+            } catch (error) {
+                showToast(`Error: ${error.message}`);
+            }
         });
 
-        // ==========================================
-        // 🔮 RENDER DE GRIDS DE RETOS DINÁMICOS (PDF)
-        // ==========================================
-        function renderFeaturedChallengesGrid(categoryFilter = "all") {
-            const container = document.getElementById("featured-challenges-container");
-            if(!container) return; container.innerHTML = "";
-
-            const filtered = categoryFilter === "all" ? featuredChallenges : featuredChallenges.filter(r => r.category === categoryFilter);
-            if(filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 col-span-2 py-2">No hay desafíos disponibles para esta categoría.</p>`;
-                return;
-            }
-
-            filtered.forEach(ch => {
-                const checkedHistory = JSON.parse(localStorage.getItem(`retos_${currentUserUID}`)) || [];
-                const isDone = checkedHistory.includes(ch.id);
-
-                container.innerHTML += `
-                    <div class="challenge-card-premium rounded-2xl p-5 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between text-[10px] uppercase font-bold text-slate-500 mb-2">
-                                <span class="text-cyan-400 bg-cyan-500/5 px-2 py-0.5 rounded border border-cyan-500/10">${ch.category}</span>
-                                <span>${ch.time || '5 min'}</span>
-                            </div>
-                            <h3 class="text-base font-bold text-white mb-1">${ch.title}</h3>
-                            <p class="text-xs text-slate-400 mb-4 leading-relaxed">${ch.desc}</p>
-                        </div>
-                        <div>
-                            <div class="w-full bg-[#020817] h-1.5 rounded-full overflow-hidden mb-4">
-                                <div class="h-full bg-cyan-400 transition-all" style="width: ${isDone ? '100%' : '0%'}"></div>
-                            </div>
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-extrabold text-yellow-500">+${ch.coins} EC</span>
-                                <div class="flex gap-2">
-                                    <button class="bg-white/5 hover:bg-white/10 text-slate-300 font-bold px-3 py-1.5 rounded-lg transition" onclick="openInteractiveChallengeModal('${ch.id}')">Ver reto</button>
-                                    <button class="${isDone ? 'bg-emerald-500/10 text-emerald-400' : 'bg-cyan-500 text-slate-900'} font-black px-3 py-1.5 rounded-lg transition" onclick="openInteractiveChallengeModal('${ch.id}')">${isDone ? 'Hecho ✓' : 'Aceptar'}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function renderMoreChallengesList() {
-            const container = document.getElementById("more-challenges-container");
-            if(!container) return; container.innerHTML = "";
-
-            listChallenges.forEach(ch => {
-                const checkedHistory = JSON.parse(localStorage.getItem(`retos_${currentUserUID}`)) || [];
-                const isDone = checkedHistory.includes(ch.id);
-
-                container.innerHTML += `
-                    <div class="bg-[#040a17]/60 border border-white/5 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-                        <div>
-                            <span class="text-[9px] text-slate-500 uppercase font-black tracking-wide">${ch.category}</span>
-                            <h4 class="font-bold text-white text-sm mt-0.5">${ch.title}</h4>
-                            <p class="text-slate-400 text-xs mt-0.5">${ch.desc}</p>
-                        </div>
-                        <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                            <span class="text-slate-500 font-medium">${ch.target}</span>
-                            <span class="font-bold text-cyan-400">+${ch.coins} EC</span>
-                            <button class="px-4 py-2 rounded-lg font-black ${isDone ? 'bg-emerald-500/10 text-emerald-400' : 'bg-white/5 hover:bg-white/10 text-white'} transition" onclick="allocateDirectChallengeBonus('${ch.id}', ${ch.coins})">
-                                ${isDone ? 'Completado' : 'Aceptar reto'}
-                            </button>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function renderLeaderboardUI() {
-            const container = document.getElementById("leaderboard-container");
-            if(!container) return; container.innerHTML = "";
-            topManadaData.forEach(row => {
-                container.innerHTML += `
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#020817]/60 border border-white/5 text-xs">
-                        <div class="flex items-center gap-2.5">
-                            <span>${row.medal}</span>
-                            <span class="font-bold text-slate-200">${row.name}</span>
-                        </div>
-                        <span class="font-black text-cyan-400">${row.coins} EC</span>
-                    </div>`;
-            });
-        }
-
-        // Manejador delegativo de pestañas de filtrado (TABS)
-        document.querySelectorAll(".tab-filter-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".tab-filter-btn").forEach(b => b.className = "tab-filter-btn px-4 py-2 rounded-lg bg-[#040a17] text-slate-400 hover:text-white transition-all uppercase");
-                btn.className = "tab-filter-btn px-4 py-2 rounded-lg bg-cyan-500 text-slate-900 font-extrabold tracking-wide uppercase transition-all";
-                renderFeaturedChallengesGrid(btn.getAttribute("data-category"));
-            });
-        });
+        document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
 
         // ==========================================
-        // 🔮 SISTEMA DE MODALES DE RETOS INTERACTIVOS
-        // ==========================================
-        window.openInteractiveChallengeModal = function(id) {
-            clearInterval(activeBreathingInterval);
-            const modal = document.getElementById("challenge-modal");
-            const inner = document.getElementById("modal-dynamic-content");
-            if(!modal || !inner) return;
-
-            const ch = featuredChallenges.find(c => c.id === id);
-            const checkedHistory = JSON.parse(localStorage.getItem(`retos_${currentUserUID}`)) || [];
-            const isDone = checkedHistory.includes(id);
-
-            modal.classList.remove("hidden");
-            inner.innerHTML = "";
-
-            if(id === "escucha_activa") {
-                inner.innerHTML = `
-                    <div class="space-y-4 text-xs">
-                        <h2 class="text-xl font-black text-white">${ch.title}</h2>
-                        <p class="text-slate-400">Practica la empatía prestando atención plena a los demás.</p>
-                        <div class="p-3 bg-[#020817] rounded-xl space-y-1 text-slate-300">
-                            <p>1. Escucha de forma activa sin interrumpir.</p>
-                            <p>2. Mira fijamente a los ojos.</p>
-                            <p>3. Resume lo que entendiste.</p>
-                        </div>
-                        <div class="space-y-2 pt-2">
-                            <label class="flex items-center gap-3"><input type="checkbox" class="chk-escucha w-4 h-4"> Escuché sin interrumpir</label>
-                            <label class="flex items-center gap-3"><input type="checkbox" class="chk-escucha w-4 h-4"> Presté atención completa</label>
-                            <label class="flex items-center gap-3"><input type="checkbox" class="chk-escucha w-4 h-4"> Respondí con empatía</label>
-                        </div>
-                        <button id="btn-done-escucha" class="w-full btn-action-cyan py-3 text-xs tracking-wide uppercase font-black">Completar Reto</button>
-                    </div>`;
-                document.getElementById("btn-done-escucha").addEventListener("click", () => {
-                    if(document.querySelectorAll(".chk-escucha:checked").length < 3) return showToast("Por favor verifica todos los pasos.");
-                    allocateDirectChallengeBonus(ch.id, ch.coins);
-                });
-            }
-            else if(id === "respira_relajate") {
-                inner.innerHTML = `
-                    <div class="space-y-5 flex flex-col items-center text-center text-xs">
-                        <h2 class="text-xl font-black text-white">${ch.title}</h2>
-                        <div class="breath-ring-modal" id="box-ring-anim"><span id="lbl-ring-state" class="font-bold text-cyan-400 uppercase text-[10px]">Listo</span></div>
-                        <button id="btn-start-modal-resp" class="w-full btn-action-cyan py-3 text-xs font-black uppercase">Iniciar Ejercicio</button>
-                    </div>`;
-                document.getElementById("btn-start-modal-resp").addEventListener("click", () => {
-                    document.getElementById("btn-start-modal-resp").classList.add("hidden");
-                    const label = document.getElementById("lbl-ring-state");
-                    const ring = document.getElementById("box-ring-anim");
-                    let cycle = 1; let timer = 4;
-
-                    label.textContent = "Inhala"; ring.className = "breath-ring-modal expand";
-                    activeBreathingInterval = setInterval(() => {
-                        timer--;
-                        if(timer <= 0) {
-                            timer = 4; cycle++;
-                            if(cycle === 2) { label.textContent = "Mantén"; ring.className = "breath-ring-modal hold"; }
-                            else if(cycle === 3) { label.textContent = "Exhala"; ring.className = "breath-ring-modal contract"; }
-                            else {
-                                clearInterval(activeBreathingInterval);
-                                label.textContent = "Listo"; ring.className = "breath-ring-modal";
-                                inner.innerHTML += `<p class="text-emerald-400 font-bold mt-2">Excelente trabajo. Tu cuerpo y mente se sienten más tranquilos 🐾</p><button class="w-full btn-action-cyan py-3 text-xs uppercase font-black mt-2" onclick="allocateDirectChallengeBonus('${ch.id}', ${ch.coins})">Completar Reto</button>`;
-                            }
-                        }
-                    }, 1000);
-                });
-            }
-            else if(id === "gestiona_tristeza") {
-                innerContainerFormulate(ch, "Escribir lo que sentimos puede ayudarnos a liberar emociones.", "¿Qué emoción estás sintiendo hoy?", "Escribe algo bonito que quisieras decirte.", "Guardar reflexión");
-            }
-            else if(id === "controla_ansiedad") {
-                innerContainerFormulate(ch, "Técnica grounding 5-4-3-2-1:", "5 cosas que ves / 4 cosas que sientes", "3 cosas que escuchas / 2 cosas que hueles / 1 positiva", "Completar");
-            }
-            else if(id === "maneja_ira") {
-                innerContainerFormulate(ch, "Antes de reaccionar, vamos a calmarnos de forma saludable.", "¿Qué provocó el enojo?", "Selecciona una solución saludable (Respirar / Alejarse)", "He logrado calmarme");
-            }
-        };
-
-        function innerContainerFormulate(ch, d1, q1, q2, btnLbl) {
-            document.getElementById("modal-dynamic-content").innerHTML = `
-                <div class="space-y-4 text-xs">
-                    <h2 class="text-xl font-black text-white">${ch.title}</h2>
-                    <p class="text-slate-400 mb-2">${d1}</p>
-                    <textarea placeholder="${q1}" class="w-full bg-[#020817] border border-white/5 rounded-xl p-3 text-xs text-white outline-none mb-2"></textarea>
-                    <textarea placeholder="${q2}" class="w-full bg-[#020817] border border-white/5 rounded-xl p-3 text-xs text-white outline-none"></textarea>
-                    <button class="w-full btn-action-cyan py-3 text-xs uppercase font-black mt-2" onclick="allocateDirectChallengeBonus('${ch.id}', ${ch.coins})">${btnLbl}</button>
-                </div>`;
-        }
-
-        window.allocateDirectChallengeBonus = function(id, amt) {
-            let completed = JSON.parse(localStorage.getItem(`retos_${currentUserUID}`)) || [];
-            if(completed.includes(id)) return showToast("Este desafío ya fue resuelto.");
-
-            completed.push(id);
-            localStorage.setItem(`retos_${currentUserUID}`, JSON.stringify(completed));
-            
-            syncCoins(amt);
-            document.getElementById("challenge-modal").classList.add("hidden");
-            renderFeaturedChallengesGrid("all");
-            renderMoreChallengesList();
-            showToast("Desafío registrado en tu bitácora escolar.");
-        };
-
-        document.getElementById("btn-close-modal").addEventListener("click", () => {
-            clearInterval(activeBreathingInterval);
-            document.getElementById("challenge-modal").classList.add("hidden");
-        });
-
-        // ==========================================
-        // SISTEMA MOOD CHECK + HISTORIAL SEMANAL
+        // 🔮 SISTEMA MOOD CHECK
         // ==========================================
         document.getElementById('btn-register-mood').addEventListener('click', async () => {
             if(!selectedEmotion || !currentUserUID) return showToast('Elige un estado primero.');
@@ -904,6 +601,7 @@
             localStorage.setItem(`tracker_${currentUserUID}`, JSON.stringify(tracker));
 
             await syncCoins(10);
+            incrementImpactMetrics(10);
             renderWeeklyDashboard();
             showToast('Emoción registrada con éxito. +10 Eight-Coins.');
         });
@@ -936,7 +634,7 @@
         }
 
         // ==========================================
-        // CHAT INTERACTIVO WOLF AI
+        // 🤖 MOTOR COGNITIVO DEL ASISTENTE WOLF AI
         // ==========================================
         const chatBox = document.getElementById("chat-messages-container");
         const chatInput = document.getElementById("chat-user-input");
@@ -946,19 +644,41 @@
         chatInput.addEventListener("keypress", (e) => { if (e.key === "Enter") processChatMessage(); });
 
         function processChatMessage() {
-            const val = chatInput.value.trim();
-            if(!val) return;
-            injectBubble(val, "user");
+            const text = chatInput.value.trim();
+            if(!text) return;
+            
+            injectBubble(text, "user");
             chatInput.value = "";
             document.getElementById("wolf-welcome-block").classList.add("hidden");
 
+            // Motor de análisis semántico avanzado de palabras clave
             setTimeout(async () => {
-                injectBubble("Entiendo lo que dices. He procesado tu mensaje para evaluar tu racha de estabilidad. Sigamos adelante. 🐾", "bot");
+                let lowerText = text.toLowerCase();
+                let chosenKey = "default";
+
+                if (/(estrés|examen|presión|estresado|estresada|colegio)/i.test(lowerText)) chosenKey = "estresado";
+                else if (/(triste|llorar|solo|sola|desanimado|desanimada)/i.test(lowerText)) chosenKey = "triste";
+                else if (/(ansiedad|nervios|miedo|respirar|asustado)/i.test(lowerText)) chosenKey = "ansiedad";
+                else if (/(enojo|ira|molesto|molesta|frustrado)/i.test(lowerText)) chosenKey = "enojado";
+                else if (/(ayuda|adulto|dece|profesor)/i.test(lowerText)) chosenKey = "adulto";
+
+                if (chosenKey === "enojado") {
+                    injectBubble("El enojo es una emoción natural, pero podemos regularla para no lastimarnos ni lastimar a la manada. Respira profundo, alejémonos un momento de la situación y ordenemos las ideas juntos. 🌿", "bot");
+                } else if (chosenKey === "adulto") {
+                    injectBubble("Recuerda que cuentas con apoyo humano inmediato. Puedes acudir de forma transparente al departamento del DECE para conversar con la Lcda. Anita Parreño.", "bot");
+                } else {
+                    injectBubble(botResponses[chosenKey], "bot");
+                }
+                
+                // Inyectar bloque dinámico de acciones rápidas para flujo continuo
+                appendInteractiveMenu();
                 await syncCoins(15);
-                showToast("Interacción registrada. +15 Eight-Coins.");
+                incrementImpactMetrics(15);
+                showToast("Wolf AI te acompañó. +15 Eight-Coins.");
             }, 750);
         }
 
+        // Escuchas para los botones rápidos de humor directo
         document.querySelectorAll(".quick-reply-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 const text = btn.getAttribute("data-text");
@@ -973,12 +693,15 @@
 
                 setTimeout(async () => {
                     injectBubble(botResponses[key], "bot");
+                    appendInteractiveMenu();
                     await syncCoins(15);
-                    showToast("Interacción registrada. +15 Eight-Coins.");
+                    incrementImpactMetrics(15);
+                    showToast("Wolf AI te acompañó. +15 Eight-Coins.");
                 }, 700);
             });
         });
 
+        // Capturador delegado para botones interactivos internos y panel derecho
         document.body.addEventListener("click", (e) => {
             const node = e.target.closest("[data-action]");
             if(!node) return;
@@ -986,42 +709,187 @@
             document.getElementById("wolf-welcome-block").classList.add("hidden");
 
             if(action === "respiracion") {
-                injectBubble("Iniciando ejercicio de respiración guiada 4-4-4...", "user");
-                setTimeout(async () => {
+                injectBubble("Quiero intentar el ejercicio de respiración.", "user");
+                setTimeout(() => {
                     const customHTML = `
-                        <div class="space-y-1 w-full max-w-xs p-2 rounded-xl breathing-box-step border-l-2 border-cyan-400 bg-cyan-500/5 mt-2">
-                            <div class="flex justify-between text-[11px] font-bold text-white"><span>🫁 1. Inhala</span> <span>4s</span></div>
-                            <div class="flex justify-between text-[11px] text-slate-400"><span>⏳ 2. Mantén</span> <span>4s</span></div>
-                            <div class="flex justify-between text-[11px] text-slate-400"><span>🌬️ 3. Exhala</span> <span>4s</span></div>
+                        <div class="space-y-1.5 w-full max-w-xs p-3 rounded-xl border border-cyan-500/20 bg-cyan-950/20 mt-2">
+                            <p class="text-xs font-bold text-cyan-400 mb-1" id="resp-phase-title">Presiona el botón para iniciar</p>
+                            <div class="flex justify-between text-[11px] font-bold text-white p-1 rounded transition-all" id="phase-inhale"><span>🫁 1. Inhala</span> <span id="time-inhale">4s</span></div>
+                            <div class="flex justify-between text-[11px] text-slate-400 p-1 rounded transition-all" id="phase-hold"><span>⏳ 2. Mantén</span> <span id="time-hold">4s</span></div>
+                            <div class="flex justify-between text-[11px] text-slate-400 p-1 rounded transition-all" id="phase-exhale"><span>🌬️ 3. Exhala</span> <span id="time-exhale">4s</span></div>
+                            <button id="btn-trigger-breathing" class="w-full mt-2 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-black py-1.5 rounded-lg text-[10px] uppercase tracking-wider">Iniciar Ejercicio</button>
                         </div>`;
-                    injectBubble("Vamos a hacer respiración 4-4-4 🫁. Repite 3 veces para calmar el cuerpo.", "bot", customHTML);
-                    await syncCoins(15);
+                    injectBubble("Vamos a hacer respiración 4-4-4 🫁", "bot", customHTML);
+                    attachBreathingEngine();
+                }, 600);
+            } 
+            else if(action === "animo") {
+                injectBubble("Necesito un mensaje de ánimo.", "user");
+                setTimeout(() => {
+                    const randomPhrase = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
+                    injectBubble(randomPhrase, "bot");
+                }, 600);
+            } 
+            else if(action === "adulto") {
+                injectBubble("Quiero saber con quién hablar.", "user");
+                setTimeout(() => {
+                    injectBubble("Si esta emoción continúa o te sientes sobrepasado, busca a un adulto de confianza, tutor o DECE. Tu bienestar es importante.", "bot");
+                }, 600);
+            }
+            else if(action === "hablar_mas") {
+                injectBubble("Quiero hablar más sobre lo que siento.", "user");
+                setTimeout(() => {
+                    injectBubble("Estoy aquí para escucharte. Escribe con tus palabras qué pasó o qué estás sintiendo en la barra inferior.", "bot");
+                }, 600);
+            }
+            else if(action === "pausa_activa") {
+                injectBubble("Requiero una pausa activa.", "user");
+                setTimeout(() => {
+                    injectBubble("Levántate, estira tus brazos, mueve tus hombros y respira profundo durante 1 minuto. ¡Haz que tu cuerpo se oxigene! 🌿", "bot");
                 }, 600);
             }
         });
 
+        function appendInteractiveMenu() {
+            const menuHTML = `
+                <div class="flex flex-wrap gap-1.5 mt-2">
+                    <button class="chat-inline-btn" data-action="respiracion">🧘‍♂️ Ejercicio de respiración</button>
+                    <button class="chat-inline-btn" data-action="hablar_mas">💬 Hablar más</button>
+                    <button class="chat-inline-btn" data-action="animo">✨ Mensaje de ánimo</button>
+                    <button class="chat-inline-btn" data-action="adulto">🏫 Hablar con un adulto</button>
+                </div>`;
+            const currentBotBubbles = chatBox.querySelectorAll(".chat-bot");
+            if(currentBotBubbles.length > 0) {
+                const container = document.createElement("div");
+                container.innerHTML = menuHTML;
+                currentBotBubbles[currentBotBubbles.length - 1].appendChild(container);
+            }
+        }
+
         function injectBubble(msg, sender, html = "") {
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             const wrapper = document.createElement("div");
             wrapper.className = `chat-bubble ${sender === "user" ? "chat-user" : "chat-bot"}`;
-            if(html) { wrapper.innerHTML = `<p>${msg}</p>${html}`; } else { wrapper.textContent = msg; }
+            
+            if(html) { 
+                wrapper.innerHTML = `<p>${msg}</p>${html}<span class="block text-[9px] opacity-40 text-right mt-1.5">${timestamp}</span>`; 
+            } else { 
+                wrapper.innerHTML = `<p>${msg}</p><span class="block text-[9px] opacity-40 text-right mt-1">${timestamp}</span>`; 
+            }
+            
             chatBox.appendChild(wrapper);
             chatBox.scrollTop = chatBox.scrollHeight;
+            saveChatHistory();
         }
 
         // ==========================================
-        // 📥 CONTROL GLOBAL INSTITUCIONAL DECE 
+        // 🫁 CRONÓMETRO SINOIDAL DE RESPIRACIÓN CONTROLADA 
+        // ==========================================
+        function attachBreathingEngine() {
+            setTimeout(() => {
+                const startBtn = document.getElementById("btn-trigger-breathing");
+                if(!startBtn) return;
+                
+                startBtn.addEventListener("click", () => {
+                    startBtn.classList.add("hidden");
+                    const titleNode = document.getElementById("resp-phase-title");
+                    const inhaleRow = document.getElementById("phase-inhale");
+                    const holdRow = document.getElementById("phase-hold");
+                    const exhaleRow = document.getElementById("phase-exhale");
+                    
+                    let seconds = 4;
+                    titleNode.textContent = "¡INHALA PROFUNDO! 🫁";
+                    inhaleRow.className = "flex justify-between text-[11px] font-bold bg-cyan-500/20 text-cyan-400 p-1 rounded transition-all";
+                    
+                    let currentPhase = 1; // 1: Inhala, 2: Mantén, 3: Exhala
+                    const clock = setInterval(() => {
+                        seconds--;
+                        if(currentPhase === 1) document.getElementById("time-inhale").textContent = `${seconds}s`;
+                        if(currentPhase === 2) document.getElementById("time-hold").textContent = `${seconds}s`;
+                        if(currentPhase === 3) document.getElementById("time-exhale").textContent = `${seconds}s`;
+
+                        if(seconds <= 0) {
+                            seconds = 4;
+                            currentPhase++;
+                            if(currentPhase === 2) {
+                                titleNode.textContent = "MANTÉN EL AIRE ⏳";
+                                inhaleRow.className = "flex justify-between text-[11px] text-slate-500 p-1 rounded";
+                                holdRow.className = "flex justify-between text-[11px] font-bold bg-yellow-500/20 text-yellow-400 p-1 rounded transition-all";
+                            } else if(currentPhase === 3) {
+                                titleNode.textContent = "EXHALA LENTAMENTE 🌬️";
+                                holdRow.className = "flex justify-between text-[11px] text-slate-500 p-1 rounded";
+                                exhaleRow.className = "flex justify-between text-[11px] font-bold bg-red-500/20 text-red-400 p-1 rounded transition-all";
+                            } else {
+                                clearInterval(clock);
+                                titleNode.textContent = "EJERCICIO COMPLETADO ✅";
+                                exhaleRow.className = "flex justify-between text-[11px] text-slate-500 p-1 rounded";
+                                titleNode.parentNode.innerHTML += `<p class="text-[11px] text-emerald-400 font-bold mt-2">Muy bien. Repite este ejercicio cuando lo necesites. Tú puedes 💙</p>`;
+                                chatBox.scrollTop = chatBox.scrollHeight;
+                                saveChatHistory();
+                            }
+                        }
+                    }, 1000);
+                });
+            }, 300);
+        }
+
+        // ==========================================
+        // 💾 PERSISTENCIA DEL HISTORIAL LOCALSTORAGE
+        // ==========================================
+        function saveChatHistory() {
+            if(!currentUserUID) return;
+            localStorage.setItem(`chathistory_${currentUserUID}`, chatBox.innerHTML);
+        }
+
+        function loadChatHistory() {
+            if(!currentUserUID) return;
+            const archivedHTML = localStorage.getItem(`chathistory_${currentUserUID}`);
+            if(archivedHTML) {
+                chatBox.innerHTML = archivedHTML;
+                document.getElementById("wolf-welcome-block").classList.add("hidden");
+                chatBox.scrollTop = chatBox.scrollHeight;
+                attachBreathingEngine(); // Re-vincular manejadores a nodos cargados
+            }
+        }
+
+        document.getElementById("btn-clear-chat").addEventListener("click", () => {
+            if(!currentUserUID) return;
+            localStorage.removeItem(`chathistory_${currentUserUID}`);
+            chatBox.innerHTML = `
+                <div id="wolf-welcome-block" class="flex flex-col items-center text-center my-4 space-y-2">
+                    <img src="assets/TU IMPORTAS.png" class="w-20 h-20 object-contain" onerror="this.src='GO FONDO AZU.png'">
+                    <h2 class="text-base font-bold text-white">Hola, soy Wolf AI 🐾</h2>
+                    <p class="text-xs text-slate-400 max-w-xs">Estoy aquí para escucharte. ¿Cómo te sientes hoy?</p>
+                </div>`;
+            showToast("Historial de chat borrado.");
+        });
+
+        // ==========================================
+        // 📊 PANEL ADMINISTRATIVO DECE Y EXPORTADOR
         // ==========================================
         function cargarTablaGlobalMaster() {
             onSnapshot(collection(db, "estudiantes"), (snap) => {
                 const tbody = document.getElementById("master-students-tbody");
                 if (!tbody) return;
-                tbody.innerHTML = ""; cachedStudentsData = [];
-                let totalStudents = 0; let circulationCoins = 0;
+                tbody.innerHTML = "";
+                cachedStudentsData = [];
+                let totalStudents = 0;
+                let circulationCoins = 0;
+
+                if (snap.empty) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-slate-500">No hay estudiantes registrados.</td></tr>`;
+                    return;
+                }
 
                 snap.forEach((doc) => {
-                    const id = doc.id; const data = doc.data();
-                    totalStudents++; circulationCoins += parseInt(data.coins || 0);
-                    cachedStudentsData.push({ uid: id, nombre: data.nombre || "Sin nombre", curso: data.curso || "7A", coins: data.coins || 0 });
+                    const id = doc.id;
+                    const data = doc.data();
+                    totalStudents++;
+                    circulationCoins += parseInt(data.coins || 0);
+
+                    cachedStudentsData.push({
+                        uid: id, nombre: data.nombre || "Sin nombre", curso: data.curso || "7A", coins: data.coins || 0
+                    });
 
                     tbody.innerHTML += `
                         <tr>
@@ -1031,44 +899,70 @@
                             <td class="font-extrabold text-cyan-400">${(data.coins || 0).toLocaleString('es-ES')} EC</td>
                         </tr>`;
                 });
+
                 document.getElementById("dece-stat-students").textContent = totalStudents;
                 document.getElementById("dece-stat-coins").textContent = `${circulationCoins.toLocaleString('es-ES')} EC`;
             });
         }
 
         document.getElementById("btn-export-csv").addEventListener("click", () => {
-            if (cachedStudentsData.length === 0) return;
+            if (cachedStudentsData.length === 0) return showToast("No hay datos para exportar.");
             let csvContent = "data:text/csv;charset=utf-8,UID Estudiante,Nombre Completo,Curso Asignado,Saldo Eight-Coins\n";
             cachedStudentsData.forEach((row) => { csvContent += `"${row.uid}","${row.nombre}","${row.curso}",${row.coins}\n`; });
             const encodedUri = encodeURI(csvContent);
             const downloadLink = document.createElement("a");
-            downloadLink.setAttribute("href", encodedUri); downloadLink.setAttribute("download", `reporte_manada_wolves.csv`);
-            document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink);
+            downloadLink.setAttribute("href", encodedUri);
+            downloadLink.setAttribute("download", `reporte_manada_wolves_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
             showToast("📥 Archivo CSV descargado con éxito.");
         });
 
-        function saveChatHistory() { if(!currentUserUID) return; localStorage.setItem(`chathistory_${currentUserUID}`, chatBox.innerHTML); }
-        function loadChatHistory() { if(!currentUserUID) return; const h = localStorage.getItem(`chathistory_${currentUserUID}`); if(h) { chatBox.innerHTML = h; document.getElementById("wolf-welcome-block").classList.add("hidden"); chatBox.scrollTop = chatBox.scrollHeight; } }
-        function renderCoinsUI() { document.getElementById('topbar-coins').textContent = coins.toLocaleString('es-ES'); }
-        function incrementImpactMetrics(amt) { sessionActivitiesCount++; sessionCoinsEarned += amt; document.getElementById("metric-activities").textContent = sessionActivitiesCount; document.getElementById("metric-coins").textContent = `+${sessionCoinsEarned}`; }
+        function incrementImpactMetrics(coinAmount) {
+            sessionActivitiesCount++;
+            sessionCoinsEarned += coinAmount;
+            document.getElementById("metric-activities").textContent = sessionActivitiesCount;
+            document.getElementById("metric-coins").textContent = `+${sessionCoinsEarned}`;
+        }
+
+        function renderCoinsUI() {
+            document.getElementById('topbar-coins').textContent = coins.toLocaleString('es-ES');
+        }
+
+        async function syncCoins(amount) {
+            coins += amount;
+            if(currentUserUID) {
+                await setDoc(doc(db, "estudiantes", currentUserUID), { coins: coins }, { merge: true });
+            }
+            renderCoinsUI();
+        }
 
         window.navigate = function(pageId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            const el = document.getElementById('page-' + pageId); if (el) el.classList.add('active');
+            const el = document.getElementById('page-' + pageId);
+            if (el) el.classList.add('active');
             document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-            const link = document.querySelector(`.sidebar-link[data-page="${pageId}"]`); if (link) link.classList.add('active');
+            const link = document.querySelector(`.sidebar-link[data-page="${pageId}"]`);
+            if (link) link.classList.add('active');
         };
 
         window.showToast = function(msg) {
-            const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3000);
         };
 
-        document.querySelectorAll('.sidebar-link').forEach(link => { link.addEventListener('click', () => window.navigate(link.dataset.page)); });
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => window.navigate(link.dataset.page));
+        });
+
         document.querySelectorAll('.emotion-card-custom').forEach(card => {
             card.addEventListener('click', () => {
                 document.querySelectorAll('.emotion-card-custom').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected'); selectedEmotion = card.parentNode.querySelector('input').value; card.parentNode.querySelector('input').checked = true;
+                card.classList.add('selected');
+                selectedEmotion = card.parentNode.querySelector('input').value;
+                card.parentNode.querySelector('input').checked = true;
             });
         });
 
@@ -1076,3 +970,5 @@
     </script>
 </body>
 </html>
+
+
